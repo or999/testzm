@@ -4,8 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material/material.module';
+import { DevUIModule, ICON_CONTRACT } from 'ng-devui';
+
+// import { MaterialModule } from './material/material.module';
+
 import { FirstModule } from './first/first.module';
+import { CoreModule } from './core/core.module';
+// TODO:import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -14,11 +19,15 @@ import { FirstModule } from './first/first.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+   // MaterialModule,
     FirstModule,
+    CoreModule,
     AppRoutingModule,
+    DevUIModule
   ],
-  providers: [],
+  providers: [
+    // TODO:httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

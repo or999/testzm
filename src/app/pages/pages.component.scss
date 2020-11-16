@@ -1,0 +1,109 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+
+d-layout {
+  background-color: $devui-base-bg;
+  height: 96vh;
+}
+
+d-aside {
+  padding-left: 1px;
+}
+
+d-header {
+  text-align: left;
+  height: 80px;
+  background-color: $devui-base-bg-dark;
+  position: relative;
+
+  .logo {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    height: 100%;
+    width: 120px;
+    color: $devui-light-text;
+    font-size: $devui-font-size-icon;
+    line-height: 100%;
+
+    .logo-devui {
+      margin-top: 27px;
+    }
+
+    .logo-devui,
+    .text {
+      display: inline-block;
+      vertical-align: center;
+    }
+  }
+  .avatar{
+    position: absolute;
+    right: 40px;
+    top: 22px;
+  }
+ 
+}
+
+d-content {
+  padding: 0 40px;
+  background-color: $devui-global-bg;
+
+  d-breadcrumb {
+    margin-top: 8px;
+  }
+
+  .inner-content {
+    background-color: $devui-base-bg;
+    padding: 16px;
+    height: 100%;
+  }
+}
+
+d-footer {
+  color: $devui-light-text;
+  background-color: $devui-base-bg-dark;
+  padding: 9px 24px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.splitter-border{
+  height: 100%;
+  .menu{
+    height: 100%;
+  }
+}
+.pane-content {
+  padding: 0 10px;
+}
+
+.title-icon {
+  font-size: $devui-font-size-icon;
+  line-height: 40px;
+  vertical-align: middle;
+  margin-right: 4px;
+  text-align: center;
+  cursor: pointer;
+
+  &.icon-dot-status {
+    color: $devui-light-text;
+  }
+
+  &:hover {
+    background-color: $devui-list-item-hover-bg;
+    color: $devui-brand-active;
+  }
+
+  &.active {
+    color: $devui-brand-active;
+  }
+}
+
+.title {
+  vertical-align: middle;
+}
+
+.splitter-border {
+  border: 1px solid $devui-dividing-line;
+}

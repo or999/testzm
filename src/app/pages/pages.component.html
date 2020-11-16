@@ -1,0 +1,99 @@
+
+<!-- <d-layout>
+    <d-header>
+      <div class="logo">
+        <span class="logo-devui">
+          <img [src]="logoSrc" width="26px" height="26px" />
+        </span>
+        <span class="text">DevUI</span>
+      </div>
+    </d-header>
+    <d-layout>
+      <d-aside>
+        <d-accordion [data]="menu"
+         class="menu" 
+         [restrictOneOpen]="true"
+          (itemClick)="itemClick($event)"
+           [accordionType]="'normal'">
+
+        </d-accordion>
+      </d-aside>
+      <d-content>
+        <d-breadcrumb>
+          <d-breadcrumb-item>
+            <span>DevUI</span>
+          </d-breadcrumb-item>
+          <d-breadcrumb-item>
+            <span>{{activeBread||'内容一'}}</span>
+          </d-breadcrumb-item>
+          <d-breadcrumb-item>
+            <span>{{activeItem||'子内容一'}}</span>
+          </d-breadcrumb-item>
+        </d-breadcrumb>
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
+      </d-content>
+    </d-layout>
+    <d-footer>footer</d-footer>
+    
+  </d-layout> -->
+  <d-layout>
+    <d-header>
+      <div class="logo">
+        <span class="logo-devui">
+          <img [src]="logoSrc" width="26px" height="26px" />
+        </span>
+        <span class="text">DevUI</span>
+      </div>
+      <div class="avatar"> <d-avatar [name]="''"></d-avatar></div>
+    </d-header>
+    <d-layout>
+      <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize" [showCollapseButton]="true">
+        <d-splitter-pane
+          [shrink]="true"
+          [size]="size"
+          [minSize]="minSize"
+          [maxSize]="maxSize"
+          [collapsed]="collapsed"
+          [shrinkWidth]="40"
+          [collapsible]="true"
+          (sizeChange)="sizeChange($event)"
+          (collapsedChange)="collapsedChange($event)"
+          (shrinkStatusChange)="paneShrinkStatus($event)"
+        >
+          <d-accordion class="menu" *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate" [menuItemTemplate]="menutemplate"></d-accordion>
+          <ng-template #menutemplate let-item="item">
+            <i class="title-icon  {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+          </ng-template>
+          <ng-template #itemtemplate let-item="item">
+            <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+          </ng-template>
+    
+          <ul style="padding: 10px 0;display: flex;flex-direction: column;" *ngIf="isPaneShrink">
+            <li
+            dTooltip
+            [content]="hoverCard[index]"
+            [position]="'right'"
+            *ngFor="let item of menu; let index = index"
+            class="title-icon {{ item.icon ? item.icon : 'icon-dot-status' }}"
+            [ngClass]="{ active: item.active || isChildrenActive(item) }"
+              (click)="selectItem(item)"
+            ></li>
+          </ul>
+        </d-splitter-pane>
+    
+        <d-splitter-pane minSize="15%">
+          <div class="pane-content">
+            <h2>右侧面板</h2>
+            <div>右侧内容区域
+              <router-outlet></router-outlet>
+
+            </div>
+          </div>
+        </d-splitter-pane>
+      </d-splitter>
+    </d-layout>
+    <d-footer>footer</d-footer>
+    
+  </d-layout> 

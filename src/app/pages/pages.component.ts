@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../core/user/user.service';
 import { menu, IMenuType } from './pages-menu';
 
 @Component({
@@ -8,10 +9,11 @@ import { menu, IMenuType } from './pages-menu';
 })
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
-  constructor() { }
+  constructor(private userService: UserService) { }
+  msgs: Array<object> = [];
   menu: IMenuType[] = menu;
-  activeItem: string;
-  activeBread: string;
+  // activeItem: string;
+  // activeBread: string;
 
   // splitter input
   orientation = 'horizontal';
@@ -25,6 +27,7 @@ export class PagesComponent implements OnInit {
   collapsed = false;
   isPaneShrink = false;
   hoverCard: Array<any> = [];
+  showCard = false;
   ngOnInit(): void {
     this.menu.forEach((item) => {
       if (item.children) {
@@ -38,18 +41,18 @@ export class PagesComponent implements OnInit {
       }
     });
   }
-  itemClick(event: { item: { title: string; }; parent: { title: string; }; }): void {
-    // console.log(event);
-    this.activeItem = event.item.title;
-    this.activeBread = event.parent.title;
-  }
+  // itemClick(event: { item: { title: string; }; parent: { title: string; }; }): void {
+  //   // console.log(event);
+  //   this.activeItem = event.item.title;
+  //   this.activeBread = event.parent.title;
+  // }
 
   sizeChange(size: any): void {
-    console.log(size);
+    // console.log(size);
   }
 
   collapsedChange(event: boolean): void {
-    console.log(event);
+    // console.log(event);
     this.collapsed = event;
   }
 
@@ -76,5 +79,9 @@ export class PagesComponent implements OnInit {
   isChildrenActive(item: { children: any[]; }): boolean {
     const isActive = item.children && item.children.some((child: { active: any; }) => child.active);
     return isActive;
+  }
+  logOut(): void {
+    this.userService.logOut();
+    this.msgs = [{ severity: 'success', summary: 'success', detail: '退出登录成功' }];
   }
 }

@@ -4,26 +4,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DevUIModule, ICON_CONTRACT } from 'ng-devui';
-
+import { DevUIModule } from 'ng-devui';
 // import { MaterialModule } from './material/material.module';
 
-import { FirstModule } from './first/first.module';
 import { CoreModule } from './core/core.module';
+import { LoginComponent } from './login/login.component';
 // TODO:import { httpInterceptorProviders } from './http-interceptors';
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
    // MaterialModule,
-    FirstModule,
     CoreModule,
     AppRoutingModule,
-    DevUIModule
+    DevUIModule,
   ],
   providers: [
     // TODO:httpInterceptorProviders

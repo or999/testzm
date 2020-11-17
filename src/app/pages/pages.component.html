@@ -46,7 +46,15 @@
         </span>
         <span class="text">DevUI</span>
       </div>
-      <div class="avatar"> <d-avatar [name]="''"></d-avatar></div>
+
+      <div  class="btn-group" dDropDown [trigger]="'click'" appendToBody 
+      [appendToBodyDirections]="['centerDown']">
+         <d-avatar class="avator" [name]="''"  dDropDownToggle ></d-avatar><ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+        <li class="disabled" role="menuitem">
+          <a class="devui-dropdown-item disabled">菜单一</a>
+        </li>
+        <li role="menuitem"><a class="devui-dropdown-item" (click)="logOut()">退出</a></li>
+      </ul></div>
     </d-header>
     <d-layout>
       <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize" [showCollapseButton]="true">
@@ -88,7 +96,7 @@
             <h2>右侧面板</h2>
             <div>右侧内容区域
               <router-outlet></router-outlet>
-
+              <d-toast [value]="msgs"></d-toast>
             </div>
           </div>
         </d-splitter-pane>

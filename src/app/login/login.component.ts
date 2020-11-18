@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   logIn(): void {
+    // TODO:订阅user服务里的可观察对象，
+    // TODO:点击登录按钮，订阅user服务中返回的可观察对象，subscribe方法中传入回调函数
     this.userService.setLogin().subscribe(() => {
       if (this.userService.isLogin) {
         this.router.navigateByUrl(this.userService.redirectUrl);

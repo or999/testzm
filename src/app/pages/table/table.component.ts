@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { originSource, SourceType } from './mock-data';
 import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
+import { interval } from 'rxjs';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  constructor() { }
   data = [{
     id: 1,
     firstName: 'Mark',
@@ -25,7 +28,6 @@ export class TableComponent implements OnInit {
   // TODO:通过viewchild也可引用本地变量
   @ViewChild('div') div: 'div';
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
-  constructor() { }
   // totalData = JSON.parse(JSON.stringify(originSource));
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
@@ -97,7 +99,6 @@ export class TableComponent implements OnInit {
   };
 
   totalDataChecked = false;
-
   checkTotalData(): void {
     this.datatable.setTableCheckStatus(
       {
@@ -129,11 +130,16 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
     console.log(this.div);
-
   }
   onPageIndexChange(pageIndex): void {
+    // TODO:测试可观察对象
+    // const secondsCounter = interval(1000);
+    // secondsCounter.subscribe((n) => {
+    //   console.log(`It's been ${n} seconds since subscribing!`);
+    // });
     this.basicDataSource = JSON.parse(JSON.stringify(originSource.slice(pageIndex - 1, pageIndex + 5)));
     setTimeout(() => {
       if (this.totalDataChecked) {
@@ -151,4 +157,5 @@ export class TableComponent implements OnInit {
       }
     });
   }
+
 }

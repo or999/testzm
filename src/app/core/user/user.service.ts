@@ -10,6 +10,7 @@ export class UserService {
   isLogin: boolean;
   redirectUrl: string;
   constructor(private router: Router) { }
+  // TODO:返回一个可观察对象
   setLogin(): Observable<boolean> {
     localStorage.setItem('isLogin', 'true');
     return of(true).pipe(

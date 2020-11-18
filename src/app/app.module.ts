@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DevUIModule } from 'ng-devui';
-// import { MaterialModule } from './material/material.module';
 
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
@@ -17,7 +16,6 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-   // MaterialModule,
     CoreModule,
     AppRoutingModule,
     DevUIModule,

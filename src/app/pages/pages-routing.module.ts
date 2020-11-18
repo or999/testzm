@@ -4,6 +4,7 @@ import { UserGuard } from '../core/user/user.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PagesComponent } from './pages.component';
+import { TableComponent } from './table/table.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,6 +14,10 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent
+    },
+    {
+      path: 'table',
+      component: TableComponent
     },
     {
       path: 'pagenotfound',

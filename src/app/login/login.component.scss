@@ -1,0 +1,46 @@
+@import '~ng-devui/styles-var/devui-var.scss';
+.loginForm{
+  position: relative;
+    padding: 50px;
+    width: 400px;
+    height: 400px;
+    margin: 100px auto;
+    box-shadow: #e1e0da -1px -1px 5px 2px;
+}
+  
+  .custom-loader {
+    border: 5px solid $devui-line;
+    border-top: 5px solid $devui-contrast;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .dloading{
+    width: 400px;
+    height: 400px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    position: absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+  }
+  .pointer{
+    pointer-events: none;
+   opacity: 0.5;
+  }
+  .opacity{
+   opacity: 0.5;
+
+  }

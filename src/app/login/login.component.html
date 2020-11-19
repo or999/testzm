@@ -1,6 +1,12 @@
-<p>login works!</p>
 <div class="loginForm">
+  <div dLoading [loading]="loading" [backdrop]="false" [loadingTemplateRef]="loadingTemplate" [view]="{top:'50%',left:'50%'}" [positionType]="'fixed'" class="dloading" [class]="!loading?'pointer':''"></div>
     <h2 style="text-align: center;">登录</h2>
+    <ng-template #loadingTemplate>
+      <div class="devui-loading-demo">
+        <div class="custom-loader"></div>
+      </div>
+    </ng-template>
+    
     <form dForm [layout]="'vertical'" ngForm (dSubmit)="submit()"
     #loginForm="dValidateRules"
     [dValidateRules]="{ message: '表单校验不通过，请检查' }">
@@ -39,8 +45,10 @@
         dFormSubmit
         [title]="loginForm.errorMessage || ''"
         [showLoading]="loginForm.pending"
+        [disabled]="loading"
+        [class]="loading?'opacity':''"
         >提交</d-button>
-        <d-button bsStyle="common" circled="true"  dFormReset>重置</d-button>
+        <d-button bsStyle="common" circled="true"  dFormReset [disabled]="loading">重置</d-button>
       </d-form-operation>
     </form>
   </div>

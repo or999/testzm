@@ -1,2 +1,47 @@
 <p>login works!</p>
-<d-button bsStyle="primary" style="margin-right: 4px;" (click)="logIn()">登录</d-button>
+<div class="loginForm">
+    <h2 style="text-align: center;">登录</h2>
+    <form dForm [layout]="'vertical'" ngForm (dSubmit)="submit()"
+    #loginForm="dValidateRules"
+    [dValidateRules]="{ message: '表单校验不通过，请检查' }">
+      <d-form-item>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'请输入用户名'">用户名</d-form-label>
+        <d-form-control>
+          <div>
+            <input dTextInput autocomplete="off" name="userName" [(ngModel)]="formData.userName"
+            [dValidateRules]="[
+              { required: true },
+              { whitespace: true },
+              { minlength: 3 },
+              { maxlength: 10 }
+            ]" />
+          </div>
+        </d-form-control>
+      </d-form-item>
+      <d-form-item>
+        <d-form-label [required]="true">密码</d-form-label>
+        <d-form-control>
+          <div>
+            <input dTextInput   type="password" autocomplete="off" name="userPassword"   placeholder="请设置6-15位密码" 
+             [(ngModel)]="formData.userPassword"
+             [dValidateRules]="[
+              { required: true },
+              { whitespace: true },
+              { minlength: 6 },
+              { maxlength: 15 },
+              { pattern: isAlphabetPattern, message: '请勿包含大小写字母以外其他字符' }
+            ]"/>
+          </div>
+        </d-form-control>
+      </d-form-item>
+      <d-form-operation>
+        <d-button bsStyle="stress" class="mr-element-spacing" circled="true"
+        dFormSubmit
+        [title]="loginForm.errorMessage || ''"
+        [showLoading]="loginForm.pending"
+        >提交</d-button>
+        <d-button bsStyle="common" circled="true"  dFormReset>重置</d-button>
+      </d-form-operation>
+    </form>
+  </div>
+  <!-- <d-button bsStyle="primary" style="margin-right: 4px;" (click)="logIn()">登录</d-button> -->

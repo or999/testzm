@@ -8,6 +8,7 @@ import { DevUIModule } from 'ng-devui';
 
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // TODO:import { httpInterceptorProviders } from './http-interceptors';
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { LoginComponent } from './login/login.component';
     CoreModule,
     AppRoutingModule,
     DevUIModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     // TODO:httpInterceptorProviders

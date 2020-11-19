@@ -8,9 +8,13 @@ import { UserService } from '../core/user/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private router: Router, private userService: UserService) { }
-
+  isAlphabetPattern = /^[a-zA-Z]+(\s+[a-zA-Z]+)*$/;
+  formData = {
+    userName: '',
+    userPassword: '',
+  };
+  constructor(private router: Router, private userService: UserService) {
+  }
   ngOnInit(): void {
   }
   logIn(): void {
@@ -22,5 +26,9 @@ export class LoginComponent implements OnInit {
         // console.log(this.userService.redirectUrl);
       }
     });
+  }
+  submit(): void {
+    console.log(this.formData);
+    this.logIn();
   }
 }

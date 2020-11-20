@@ -21,8 +21,9 @@ const menu: Array<IMenuType> = [
     title: '内容二',
     icon: 'icon-gps',
     active: false,
+    link: '',
     children: [
-      { title: '子内容1', active: false, link: '21' },
+      { title: '子内容1', active: false, link: 'map' },
       { title: '子内容2', active: false, link: '22' },
       { title: '子内容3', active: false, link: '23' },
     ],

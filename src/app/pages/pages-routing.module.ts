@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserGuard } from '../core/user/user.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MapComponent } from './map/map.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PagesComponent } from './pages.component';
 import { TableComponent } from './table/table.component';
@@ -18,6 +19,10 @@ const routes: Routes = [{
     {
       path: 'table',
       component: TableComponent
+    },
+    {
+      path: 'map',
+      component: MapComponent
     },
     {
       path: 'pagenotfound',

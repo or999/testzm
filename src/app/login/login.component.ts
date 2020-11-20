@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {
   }
   ngOnInit(): void {
+    // this.userService.getWeather().subscribe( (res) => { console.log((res as any).status); });
   }
   logIn(): void {
     // TODO:订阅user服务里的可观察对象，
@@ -32,9 +33,11 @@ export class LoginComponent implements OnInit {
             this.loading = undefined;
           }
         });
+
   }
   submit(): void {
     console.log(this.formData);
     this.logIn();
   }
+  // tslint:disable-next-line: use-lifecycle-interface
 }

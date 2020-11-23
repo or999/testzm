@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // this.userService.getWeather().subscribe( (res) => { console.log((res as any).status); });
   }
-  logIn(): void {
+  logIn(name, password): void {
     // TODO:订阅user服务里的可观察对象，
     // TODO:点击登录按钮，订阅user服务中返回的可观察对象，subscribe方法中传入回调函数
     this.loading =
-      this.userService.setLogin().pipe(delay(9000)).subscribe(
+      this.userService.setLogin(name, password).pipe(delay(9000)).subscribe(
         () => {
           if (this.userService.isLogin) {
             this.router.navigateByUrl(this.userService.redirectUrl);
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
   submit(): void {
     console.log(this.formData);
-    this.logIn();
+    const { userName, userPassword } = this.formData;
+    this.logIn(userName, userPassword);
   }
-  // tslint:disable-next-line: use-lifecycle-interface
 }

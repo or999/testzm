@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MapService } from 'src/app/core/amap/map.service';
 declare var AMap: any;
+declare var AMapUI: any;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -10,6 +11,7 @@ declare var AMap: any;
 export class MapComponent implements OnInit {
   jing = 113.777523;
   wei = 34.745608;
+  @ViewChild('map') map: 'map';
   constructor(private mapService: MapService) { }
   ngOnInit(): void {
     this.drawMap();
@@ -42,12 +44,30 @@ export class MapComponent implements OnInit {
         position: marker.getPosition()
       });
     });
+    const contextMenu = new AMap.ContextMenu(
+      { isCustom: true }
+    );
+    contextMenu.addItem('<div>test</div>', () => { this.test(); }, 0);
+    marker.on('rightclick', (e) => {
+      contextMenu.open(map, e.lnglat);
+    });
     map.on('click', (e) => {
       this.jing = e.lnglat.getLng();
       this.wei = e.lnglat.getLat();
       map.setCenter([this.jing, this.wei]);
       marker.setPosition([this.jing, this.wei]);
     });
+    AMapUI.loadUI([
+      'overlay/SimpleMarker', // SimpleMarker
+      'overlay/SimpleInfoWindow', // SimpleInfoWindow
+    ],
+      function(SimpleMarker, SimpleInfoWindow) {
+        // ....引用加载的UI....
+      });
+  }
+  test(): void {
+    console.log('test');
+    console.log(this.jing);
   }
 
 }

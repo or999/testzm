@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["date-fns/format","date-fns/parse","enquire.js","echarts"],
+            "allowedCommonJsDependencies": ["date-fns/format","date-fns/parse","enquire.js","echarts","echarts-gl"],
             "outputPath": "dist/zm",
             "index": "src/index.html",
             "main": "src/main.ts",

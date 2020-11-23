@@ -50,5 +50,11 @@ const menu: Array<IMenuType> = [
       { title: '子内容3', active: false, link: '53' },
     ],
   },
+  {
+    title: 'superroot',
+    icon: 'icon-op-delete',
+    active: false,
+    link: 'superroot'
+  }
 ];
 export { IMenuType, menu };

@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate, CanActivateChild, CanDeactivate,
-  CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router
+  CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route,
+  UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from './user.service';
+import { User } from '../user/user';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+export class SuperrootGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+  constructor(private userService: UserService) {
+
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const url: string = state.url;
-    return this.checkLogin(url);
+    return this.userService.isRoot();
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -31,18 +34,6 @@ export class UserGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const url = `/${route.path}`;
-    return this.checkLogin(url);
-  }
-  constructor(private userService: UserService, private router: Router) { }
-  checkLogin(url: string): boolean {
-    if (this.userService.isLogin || localStorage.getItem('isLogin')) {
-      this.userService.isLogin = true;
-      return true;
-    } else {
-      // this.userService.redirectUrl = url;
-      this.router.navigateByUrl('login');
-      return false;
-    }
+    return this.userService.isRoot();
   }
 }

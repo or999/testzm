@@ -8,10 +8,13 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+
   {
     path: 'pages',
     loadChildren: () => import('../app/pages/pages.module').then(m => m.PagesModule),
-    canActivate: [UserGuard]
+    canActivate: [UserGuard],
+    canActivateChild: [UserGuard],
+    canLoad: [UserGuard]
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },

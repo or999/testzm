@@ -16,7 +16,7 @@ import { MapComponent } from './map/map.component';
     CommonModule,
     PagesRoutingModule,
     DevUIModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class PagesModule { }

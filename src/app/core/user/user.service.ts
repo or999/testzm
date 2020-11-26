@@ -29,6 +29,9 @@ export class UserService {
     this.router.navigateByUrl('login');
   }
   isRoot(): boolean {
-    return Boolean(this.user.power);
+    const user = this.user || JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return Boolean(user.power);
+    }
   }
 }

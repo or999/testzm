@@ -7,7 +7,6 @@ import { key, rootUrl } from './key';
   providedIn: 'root'
 })
 export class MapService {
-
   constructor(private http: HttpClient) { }
   getMap(): Observable<any> {
     return this.http.get(
@@ -18,7 +17,7 @@ export class MapService {
   // TODO:高德地图testkey: ebe93f49afd42bd656ba514238a2af07
   getWeather(): Observable<object> {
     return this.http.get(
-      rootUrl + 'weather/weatherInfo?city=110101&extensions=base&key=' + key
+      rootUrl + 'weather/weatherInfo?city=110101&extensions=base&key=' + key,
     ).pipe(
       tap((res) => console.log(res)),
       // delay(1000),

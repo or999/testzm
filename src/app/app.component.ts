@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { UserService } from './core/user/user.service';
-
 @Component({
   selector: 'app-root',
   template: `<router-outlet></router-outlet>`,
@@ -17,6 +16,8 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl(this.uerService.redirectUrl);
 
   }
+
+
 
 
 }

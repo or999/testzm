@@ -9,7 +9,7 @@ import { DevUIModule } from 'ng-devui';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 // TODO:import { httpInterceptorProviders } from './http-interceptors';
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     DevUIModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [
     // TODO:httpInterceptorProviders

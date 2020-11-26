@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MapService } from 'src/app/core/amap/map.service';
-declare var AMap: any;
-declare var AMapUI: any;
+declare const AMap: any;
+declare const AMapUI: any;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -17,7 +17,7 @@ export class MapComponent implements OnInit {
     this.drawMap();
   }
   drawMap(): void {
-
+// TODO:原始方式加载高德地图（不推荐）
     const map = new AMap.Map('container', {
       zooms: [4, 18], // 设置地图级别范围
       zoom: 18,
@@ -58,11 +58,15 @@ export class MapComponent implements OnInit {
       marker.setPosition([this.jing, this.wei]);
     });
     AMapUI.loadUI([
-      'overlay/SimpleMarker', // SimpleMarker
+      // 'overlay/SimpleMarker', // SimpleMarker
       'overlay/SimpleInfoWindow', // SimpleInfoWindow
     ],
-      function(SimpleMarker, SimpleInfoWindow) {
-        // ....引用加载的UI....
+      function(SimpleInfoWindow) {
+        const infoWindow = new SimpleInfoWindow({
+          infoTitle: '<strong>这里是标题</strong>',
+          infoBody: '<p>这里是内容。</p>'
+        });
+        infoWindow.open(map, map.getCenter());
       });
   }
   test(): void {

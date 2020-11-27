@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { observable, Observable, of, throwError } from 'rxjs';
 import { tap, delay, catchError, retry, debounceTime } from 'rxjs/operators';
 import { key, rootUrl } from './key';
 @Injectable({

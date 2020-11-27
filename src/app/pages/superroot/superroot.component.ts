@@ -1,6 +1,8 @@
 import { AfterViewInit } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { identity } from 'rxjs';
+import { ModalService, DialogService } from 'ng-devui/modal';
+import { StableComponent } from './stable/stable.component';
 declare const AMap: any;
 declare const Loca: any;
 declare const AMapUI: any;
@@ -9,11 +11,11 @@ declare const AMapLoader: any;
 @Component({
   selector: 'app-superroot',
   templateUrl: './superroot.component.html',
-  styleUrls: ['./superroot.component.css']
+  styleUrls: ['./superroot.component.scss']
 })
 export class SuperrootComponent implements OnInit, AfterViewInit {
-
-  constructor() { }
+  showTable = false;
+  constructor(private dialogService: DialogService) { }
   citys: any;
   ngOnInit(): void {
     // this.creatMap();
@@ -120,4 +122,28 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
     const b = identity('string');
     console.log(a);
   }
-}
+  toShowtable(): void {
+    this.showTable = !this.showTable;
+  }
+  openModal() {
+    const results = this.dialogService.open({
+      id: 'dialog-service',
+      width: '500px',
+      maxHeight: '500px',
+      showAnimate: false,
+      title: 'This is title',
+      content: StableComponent,
+      dialogtype: 'standard',
+      backdropCloseable: true,
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: '保存',
+          handler: ($event: Event) => {
+            results.modalInstance.hide();
+          }
+        },
+      ],
+    });
+  }
+  }

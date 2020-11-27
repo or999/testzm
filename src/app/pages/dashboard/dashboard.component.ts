@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import 'echarts-gl';
+import { from, Observable, of, scheduled } from 'rxjs';
+import { delay, skip, take } from 'rxjs/operators';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -10,6 +12,8 @@ export class DashboardComponent implements OnInit {
     constructor() { }
     condition = 1;
     ngOnInit(): void {
+        // this.myObservable();
+        this.test2();
         const myChart = echarts.init(document.getElementById('main'));
         const option = {
             title: {
@@ -81,4 +85,51 @@ export class DashboardComponent implements OnInit {
     //         fontSize: '40px'
     //     };
     // }
+    myObservable(): void {
+        function create(subscriber) {
+            const observable = {
+                subscribe(observer) {
+                    subscriber(observer);
+
+                }
+            };
+            return observable;
+        }
+        const observableTest = create(
+            (observer) => { observer.next(1); observer.next(2); observer.complete(); }
+        );
+        const observer = {
+            next: (value) => {
+                console.log(value);
+            },
+            complete: () => {
+                console.log('complete');
+
+            }
+        };
+        observableTest.subscribe(observer);
+    }
+    test(): Observable<any> {
+        return from([1, 2, 3]);
+    }
+    test3(): any {
+        return {
+            next: (value) => {
+                console.log(value);
+            },
+            error: (error) => {
+                console.log(error);
+            },
+            complete: () => {
+                console.log('complete');
+            }
+        };
+    }
+    test2() {
+        this.test().pipe(
+            take(2),
+            skip(1),
+            delay(6000)
+        ).subscribe(this.test3());
+    }
 }

@@ -1,2 +1,24 @@
 <h1>只有超级管理员可以看到这个模块</h1>
-<div id="maplayer" style="width: 600px;height: 600px;margin: 0 auto;"> </div>
+<div style="position: relative;">
+    <div id="maplayer" style="width: 1239.6px;height: 600px;margin: 0 auto;"> </div>
+    <div class="info" style="position: absolute;left: 0;top: 0;">
+        <d-card style="width: 350px">
+            <d-card-header>
+              <d-avatar dCardAvatar [name]="'DevUI'"></d-avatar>
+              <d-card-title>这是一个信息窗体</d-card-title>
+              <d-card-subtitle><i class="icon-company-member card-icon"></i><span>DevUI</span></d-card-subtitle>
+            </d-card-header>
+            <d-card-content>
+             此信息窗体用来显示简单信息，以及一些交互操作。
+            </d-card-content>
+            <d-card-actions [align]="'start'">
+              <div class="card-block"><i class="icon-like card-icon"></i><span>12</span></div>
+              <div class="card-block"><i class="icon-star-o card-icon"></i><span>8</span></div>
+              <div class="card-block"><i class="icon-message card-icon"></i><span>8</span></div>
+              <button (click)="toShowtable()" >打开/关闭table</button>
+              <d-button bsStyle="primary" (click)="openModal()">click me!</d-button>
+            </d-card-actions>
+          </d-card>
+    </div>
+    <app-stable *ngIf="showTable" style="position: absolute;top: 0;right: 0;width: 600px;"></app-stable>
+</div>

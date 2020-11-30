@@ -15,13 +15,14 @@ declare const AMapLoader: any;
 })
 export class SuperrootComponent implements OnInit, AfterViewInit {
   showTable = false;
+  mapStyle = false;
+  mapCopy: any;
   constructor(private dialogService: DialogService) { }
-  citys: any;
   ngOnInit(): void {
     // this.creatMap();
+    this.map();
   }
   ngAfterViewInit(): void {
-    this.map();
   }
 
   creatMap(): void {
@@ -52,22 +53,41 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
     layer.render();
     layer.show();
   }
-  map() {
+  toggle(): void {
+    let styleName: string;
+    if (this.mapStyle) {
+      styleName = 'amap://styles/5c68fe2b796cca58d2d3ba70ca096a68';
+      this.mapStyle = false;
+    } else {
+      styleName = 'amap://styles/8694a57a8a914b08093c06fb532b0089';
+      this.mapStyle = true;
+    }
+    this.mapCopy.setMapStyle(styleName);
+  }
+  map(): void {
     // TODO:使用Amaploader加载高德地图
     AMapLoader.load({ // 首次调用 load
       key: '259d444fe2a92c30a37d89767439d230', // 首次load key为必填
       version: '1.4.15',
+      // TODO:地图插件
+      plugins: ['AMap.MouseTool'],
+      // TODO:数据可视化库
       Loca: {
         version: '1.3.2',
       },
+      // TODO:地图组件库
       AMapUI: {
         version: '1.1',
         plugins: ['overlay/SimpleMarker']
       }
     }).then((AMap) => {
+      // TODO: 创建地图
       const map = new AMap.Map('maplayer', {
         zoom: 5,
+        mapStyle: this.mapStyle ? 'amap://styles/8694a57a8a914b08093c06fb532b0089' : 'amap://styles/5c68fe2b796cca58d2d3ba70ca096a68'
       });
+      this.mapCopy = map;
+      // TODO:创建标记点
       const marker = new AMapUI.SimpleMarker({
         iconLabel: '1',
         // 自定义图标地址
@@ -79,6 +99,23 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
         position: ['113.777523', '34.745608'],
         zIndex: 100
       });
+      // TODO: 自定义右键菜单
+      const contextMenu = new AMap.ContextMenu();
+      const mouseTool = new AMap.MouseTool(map);
+      contextMenu.addItem('添加标记', () => {
+        mouseTool.close();
+        const marker1 = new AMap.Marker({
+          map,
+          position: mousexy // 基点位置
+        });
+        contextMenu.close();
+      }, 0);
+      let mousexy;
+      map.on('rightclick', (e) => {
+        mousexy = e.lnglat;
+        contextMenu.open(map, e.lnglat);
+      });
+      // TODO:可视化数据
       const layer = new Loca.PointLayer({
         map,
       });
@@ -103,7 +140,7 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
           // 描边宽度，单位像素
           borderWidth: 1,
           // 透明度 [0-1]
-          opacity: 0.9,
+          opacity: 0.5,
         }
       });
       layer.render();
@@ -135,6 +172,7 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
       content: StableComponent,
       dialogtype: 'standard',
       backdropCloseable: true,
+      bodyScrollable: true,
       buttons: [
         {
           cssClass: 'primary',
@@ -146,4 +184,4 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
       ],
     });
   }
-  }
+}

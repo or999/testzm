@@ -23,7 +23,7 @@ const routes: Routes = [{
       component: TableComponent
     },
     {
-      path: 'map',
+      path: 'child1',
       component: MapComponent
     },
     {

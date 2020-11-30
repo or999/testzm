@@ -12,7 +12,7 @@ interface IMenuType {
 }
 const menu: Array<IMenuType> = [
   {
-    title: '内容一',
+    title: '首页',
     active: false,
     link: 'dashboard',
     icon: 'icon-share',
@@ -23,19 +23,19 @@ const menu: Array<IMenuType> = [
     active: false,
     link: '',
     children: [
-      { title: '子内容1', active: false, link: 'map' },
-      { title: '子内容2', active: false, link: '22' },
-      { title: '子内容3', active: false, link: '23' },
+      { title: '子内容1', active: false, link: 'child1' },
+      { title: '子内容2', active: false, link: 'child2' },
+      { title: '子内容3', active: false, link: 'child3' },
     ],
   },
   {
-    title: '内容三',
+    title: '表格',
     icon: 'icon-go-module',
     active: false,
     link: 'table'
   },
   {
-    title: '内容四',
+    title: '404',
     icon: 'icon-layout',
     active: false,
     link: 'pagenotfound'
@@ -51,7 +51,7 @@ const menu: Array<IMenuType> = [
     ],
   },
   {
-    title: 'superroot',
+    title: '超级管理员',
     icon: 'icon-op-delete',
     active: false,
     link: 'superroot'

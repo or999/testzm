@@ -15,11 +15,11 @@ const menu: Array<IMenuType> = [
     title: '首页',
     active: false,
     link: 'dashboard',
-    icon: 'icon-share',
+    icon: 'icon-go-chart',
   },
   {
     title: '内容二',
-    icon: 'icon-gps',
+    icon: 'icon-folder-2',
     active: false,
     link: '',
     children: [
@@ -30,19 +30,19 @@ const menu: Array<IMenuType> = [
   },
   {
     title: '表格',
-    icon: 'icon-go-module',
+    icon: 'icon-op-list',
     active: false,
     link: 'table'
   },
   {
     title: '404',
-    icon: 'icon-layout',
+    icon: 'icon-classroom-reject',
     active: false,
     link: 'pagenotfound'
   },
   {
     title: '内容五',
-    icon: 'icon-op-delete',
+    icon: 'icon-loading',
     active: false,
     children: [
       { title: '子内容1', active: false, link: '51' },
@@ -52,7 +52,7 @@ const menu: Array<IMenuType> = [
   },
   {
     title: '超级管理员',
-    icon: 'icon-op-delete',
+    icon: 'icon-gps',
     active: false,
     link: 'superroot'
   }

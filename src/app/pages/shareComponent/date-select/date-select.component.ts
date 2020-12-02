@@ -13,7 +13,7 @@ export class DateSelectComponent implements OnInit {
 
   startDate = new Date();
   endDate = null;
-  ngOnInit() {
+  ngOnInit(): void {
   }
   getValue(value): void {
     console.log(value);

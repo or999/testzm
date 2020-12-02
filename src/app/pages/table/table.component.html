@@ -1,6 +1,21 @@
+<section>
+  <d-tabs [(activeTab)]="tabActiveId" [cssClass]="'custom-tabs'">
+    <d-tab *ngFor="let item of tabItems" [disabled]="item?.disabled" [id]="item.id">
+      <ng-template dTabTitle>
+        {{ item.title }}
+      </ng-template>
+      <ng-template dTabContent>
+        {{ item.content }}
+        <app-date-select></app-date-select> 
+  <app-stable></app-stable>
+        <hr />
+      </ng-template>
+    </d-tab>
+  </d-tabs>
+</section>
 
-<app-date-select></app-date-select>
-<d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig">
+
+<!-- <d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig">
   <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
     <tr dTableRow>
       <th dHeadCell>#</th>
@@ -28,6 +43,6 @@
  <d-pagination class="page-nation" [size]="'sm'" [total]="pager.total" [pageSize]="pager.pageSize"
   [showPageSelector]="false" [totalItemText]="'总条数'" [(pageIndex)]="pager.pageIndex" [canViewTotal]="true" [lite]="true"
   (pageIndexChange)="onPageIndexChange($event)">
-</d-pagination>
+</d-pagination> -->
 
 <div #div>testDiv</div>

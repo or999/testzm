@@ -49,7 +49,7 @@ export class PagesComponent implements OnInit {
     // console.log(event);
     const selectedItem = event.item;
     this.menu.forEach((item) => {
-      if (item === selectedItem || item.children ?.some(
+      if (item === selectedItem || item.children?.some(
         (child) => {
           return child === selectedItem;
         })) {

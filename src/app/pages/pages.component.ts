@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
 import { UserService } from '../core/user/user.service';
@@ -11,7 +12,7 @@ import { menu, IMenuType } from './pages-menu';
 })
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
   msgs: Array<object> = [];
   menu: IMenuType[] = menu;
   menu2: IMenuType[];
@@ -69,20 +70,18 @@ export class PagesComponent implements OnInit {
   }
 
   selectItem(selectedItem: IMenuType): void {
-    // this.menu.forEach((item) => {
-    //   if (item === selectedItem) {
-    //     item.active = true;
-    //     console.log(this.menu);
-    //   } else {
-    //     item.active = false;
-    //     if (item.children) {
-    //       item.children.forEach((child) => {
-    //         child.active = false;
-    //       });
-    //     }
-    //   }
-    // });
-    this.collapsedChange(false);
+    if (selectedItem.children) {
+      this.collapsedChange(false);
+    } else {
+      this.menu.forEach((item) => {
+        if (item === selectedItem) {
+          item.active = true;
+        } else {
+          item.active = false;
+        }
+      });
+      this.router.navigate(['/pages', selectedItem.link]);
+    }
   }
 
   paneShrinkStatus(status: boolean): void {

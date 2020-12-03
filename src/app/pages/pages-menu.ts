@@ -13,7 +13,7 @@ interface IMenuType {
 const menu: Array<IMenuType> = [
   {
     title: '首页',
-    active: false,
+    active: true,
     link: 'dashboard',
     icon: 'icon-go-chart',
   },
@@ -21,11 +21,9 @@ const menu: Array<IMenuType> = [
     title: '内容二',
     icon: 'icon-folder-2',
     active: false,
-    link: '',
     children: [
-      { title: '子内容1', active: false, link: 'child1' },
+      { title: '子内容1', active: false, link: 'map' },
       { title: '子内容2', active: false, link: 'child2' },
-      { title: '子内容3', active: false, link: 'child3' },
     ],
   },
   {
@@ -45,9 +43,7 @@ const menu: Array<IMenuType> = [
     icon: 'icon-loading',
     active: false,
     children: [
-      { title: '子内容1', active: false, link: '51' },
-      { title: '子内容2', active: false, link: '52' },
-      { title: '子内容3', active: false, link: '53' },
+      { title: '子内容1', active: false, link: 'child1' },
     ],
   },
   {

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SuperrootRoutingModule } from './superroot-routing.module';
 import { SuperrootComponent } from './superroot.component';
 import { DevUIModule } from 'ng-devui';
-import { StableComponent } from '../shareComponent/stable/stable.component';
+import { ShareComponentModule } from '../share-component/share-component.module';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { StableComponent } from '../shareComponent/stable/stable.component';
   imports: [
     CommonModule,
     SuperrootRoutingModule,
-    DevUIModule
+    DevUIModule,
+    ShareComponentModule
   ],
 })
 export class SuperrootModule { }

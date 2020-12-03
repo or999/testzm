@@ -71,7 +71,8 @@
           (collapsedChange)="collapsedChange($event)"
           (shrinkStatusChange)="paneShrinkStatus($event)"
         >
-          <d-accordion class="menu" *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate" [menuItemTemplate]="menutemplate" [linkType]="'routerLink'"></d-accordion>
+          <d-accordion class="menu" *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate" [menuItemTemplate]="menutemplate" [linkType]="'routerLink'" [restrictOneOpen]="true"
+          (itemClick)="itemClick($event)" ></d-accordion>
           <ng-template #menutemplate let-item="item">
             <i class="title-icon  {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
           </ng-template>
@@ -91,7 +92,7 @@
             ></li>
           </ul>
         </d-splitter-pane>
-    
+       
         <d-splitter-pane minSize="15%">
           <div class="pane-content">
             <h2>右侧面板</h2>

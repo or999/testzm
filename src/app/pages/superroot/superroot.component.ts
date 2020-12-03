@@ -2,7 +2,7 @@ import { AfterViewInit } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { identity } from 'rxjs';
 import { ModalService, DialogService } from 'ng-devui/modal';
-import { StableComponent } from '../shareComponent/stable/stable.component';
+import { StableComponent } from '../share-component/stable/stable.component';
 declare const AMap: any;
 declare const Loca: any;
 declare const AMapUI: any;

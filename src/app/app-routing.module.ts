@@ -17,7 +17,7 @@ const routes: Routes = [
     canLoad: [UserGuard]
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+   { path: '**', redirectTo: 'pages' },
 ];
 
 @NgModule({

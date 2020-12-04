@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
 import { UserService } from '../core/user/user.service';
@@ -14,8 +14,7 @@ export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
   constructor(private userService: UserService, private router: Router) { }
   msgs: Array<object> = [];
-  menu: IMenuType[] = menu;
-  menu2: IMenuType[];
+  menu: IMenuType[];
   key = {
     activeKey: 'active',
   };
@@ -33,9 +32,13 @@ export class PagesComponent implements OnInit {
   hoverCard: Array<any> = [];
   showCard = false;
   ngOnInit(): void {
+    // TODO:判断用户权限，通过用户权限生成不同菜单。
     const name = this.userService.user?.name || JSON.parse(localStorage.getItem('user')).name;
-    if ( name !== 'root') {
+    if (name !== 'root') {
+      this.menu = menu;
       this.menu.pop();
+    } else {
+      this.menu = menu;
     }
     this.menu.forEach((item) => {
       if (item.children) {

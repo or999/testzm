@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { LoadingType } from 'ng-devui/loading';
 import { delay } from 'rxjs/operators';
 import { UserService } from '../core/user/user.service';
@@ -25,10 +25,12 @@ export class LoginComponent implements OnInit {
     // TODO:订阅user服务里的可观察对象，
     // TODO:点击登录按钮，订阅user服务中返回的可观察对象，subscribe方法中传入回调函数
     this.loading =
-      this.userService.setLogin(name, password).pipe(delay(9000)).subscribe(
+      this.userService.setLogin(name, password).pipe(delay(1000)).subscribe(
         () => {
           if (this.userService.isLogin) {
-            this.router.navigateByUrl(this.userService.redirectUrl);
+            this.router.navigate([this.userService.redirectUrl]).then( () => {
+
+            });
             // console.log(this.userService.redirectUrl);
             this.loading = undefined;
           }

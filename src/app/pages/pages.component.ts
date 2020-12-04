@@ -12,7 +12,7 @@ import { menu, IMenuType } from './pages-menu';
 })
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private router: Router) { }
   msgs: Array<object> = [];
   menu: IMenuType[] = menu;
   menu2: IMenuType[];
@@ -33,6 +33,10 @@ export class PagesComponent implements OnInit {
   hoverCard: Array<any> = [];
   showCard = false;
   ngOnInit(): void {
+    const name = this.userService.user?.name || JSON.parse(localStorage.getItem('user')).name;
+    if ( name !== 'root') {
+      this.menu.pop();
+    }
     this.menu.forEach((item) => {
       if (item.children) {
         let childTitle = `<span>${item.title}</span>`;
@@ -63,12 +67,10 @@ export class PagesComponent implements OnInit {
   sizeChange(size: any): void {
     //  console.log(size);
   }
-
   collapsedChange(event: boolean): void {
     //  console.log(event);
     this.collapsed = event;
   }
-
   selectItem(selectedItem: IMenuType): void {
     if (selectedItem.children) {
       this.collapsedChange(false);

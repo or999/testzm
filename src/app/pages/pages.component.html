@@ -43,11 +43,14 @@
     <d-header>
       <div class="logo">
         <span class="logo-devui">
-          <img [src]="logoSrc" width="26px" height="26px" />
+          <img [src]="logoSrc" width="30px" height="30px" />
         </span>
         <span class="text">DevUI</span>
       </div>
-
+      <div class="message">
+        <d-badge count="8" badgePos="top-right" [offsetXY]="[3, 2]">
+        <i class="icon icon-head-notice" style="font-size: 22px;color: white;"></i>
+      </d-badge></div>
       <div  class="btn-group" dDropDown [trigger]="'click'" appendToBody 
       [appendToBodyDirections]="['centerDown']">
          <d-avatar class="avator" [name]="''"  dDropDownToggle ></d-avatar><ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">

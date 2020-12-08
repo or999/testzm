@@ -4,8 +4,15 @@ import { observable, Observable, of, throwError } from 'rxjs';
 import { tap, delay, catchError, retry, debounceTime } from 'rxjs/operators';
 import { key, rootUrl } from './key';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
+// TODO:限制服务使用范围方法一
+// 删掉{
+//   providedIn: 'root'
+// }
+//  在要使用该服务的模块 加入 providers: [MapService]
+// TODO: providedIn: CoreModule 限制服务使用范围，只有导入core模块的模块及其子模块才能使用 该服务。
+  //   providedIn: 'any' 在所有急性加载模块共用同一个服务实例，在每个惰性加载新的服务实例
 export class MapService {
   constructor(private http: HttpClient) { }
   getMap(): Observable<any> {

@@ -3,6 +3,7 @@ import { ViewEncapsulation } from '@angular/core';
 import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
 import { DialogService } from 'ng-devui/modal';
 import { interval } from 'rxjs';
+import { TableFormComponent } from '../table-form/table-form.component';
 @Component({
   selector: 'app-stable',
   templateUrl: './stable.component.html',
@@ -13,6 +14,7 @@ export class StableComponent implements OnInit {
   // TODO:父组件通过viewchild与子组件通信，使用子组件d-data-table 的公用方法
   // TODO:通过viewchild也可引用本地变量
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
+
   // totalData = JSON.parse(JSON.stringify(originSource));
   basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
   dataTableOptions = {
@@ -76,7 +78,7 @@ export class StableComponent implements OnInit {
     },
     {
       field: 'light',
-      width: '200px'
+      width: '250px'
     },
     {
       field: 'address',
@@ -99,7 +101,6 @@ export class StableComponent implements OnInit {
     pageIndex: 1,
     pageSize: 6
   };
-
   totalDataChecked = false;
   checkTotalData(): void {
     this.datatable.setTableCheckStatus(
@@ -109,7 +110,6 @@ export class StableComponent implements OnInit {
     );
     this.totalDataChecked = true;
   }
-
   checkPageData(): void {
     this.datatable.setTableCheckStatus(
       {
@@ -118,7 +118,6 @@ export class StableComponent implements OnInit {
     );
     this.totalDataChecked = false;
   }
-
   onRowCheckChange(checked, rowIndex, nestedIndex, rowItem): void {
     rowItem.$checked = checked;
     rowItem.$halfChecked = false;
@@ -130,7 +129,7 @@ export class StableComponent implements OnInit {
     });
   }
   beforeChange = (currentValue) => {
-    console.log('currentValue: ' + currentValue);
+    // console.log('currentValue: ' + currentValue);
     return new Promise((resolve) => {
       const results = this.dialogService.open({
         id: 'dialog-service',
@@ -163,8 +162,11 @@ export class StableComponent implements OnInit {
       });
     });
   }
-  onChange2(state): void {
-    console.log(state);
+  onChange2(item): void {
+    console.log(item);
+  }
+  lightChange(item): void {
+    console.log(item);
   }
   ngOnInit(): void {
   }
@@ -191,6 +193,64 @@ export class StableComponent implements OnInit {
       }
     });
   }
+  openPreventCloseModal(): void {
+    const results = this.dialogService.open({
+      id: 'dialog-service',
+      width: '500px',
+      maxHeight: '500px',
+      showAnimate: false,
+      title: '添加',
+      content: TableFormComponent,
+      dialogtype: 'standard',
+      // beforeHidden: () => this.beforeHidden(),
+      backdropCloseable: true,
+      buttons: [
+        {
+          cssClass: 'stress',
+          text: '关闭',
+          handler: ($event: Event) => {
+            results.modalInstance.hide();
+            //  TODO: 弹窗关闭之后，在这里重新请求数据
+          },
+
+        }
+      ],
+    });
+  }
+
+  beforeHidden(): Promise<boolean> {
+    return new Promise((resolve) => {
+      const results = this.dialogService.open({
+        id: 'dialog-service',
+        width: '300px',
+        maxHeight: '600px',
+        showAnimate: false,
+        title: '',
+        content: '是否保存修改内容？',
+        backdropCloseable: false,
+        dialogtype: 'warning',
+        buttons: [
+          {
+            cssClass: 'primary',
+            text: '保存',
+            handler: ($event: Event) => {
+              results.modalInstance.hide();
+              resolve(true);
+            }
+          },
+          {
+            id: 'btn-cancel',
+            cssClass: 'common',
+            text: '不保存',
+            handler: ($event: Event) => {
+              results.modalInstance.hide();
+              resolve(true);
+            }
+          },
+        ]
+      });
+    });
+  }
 
 }
 interface SourceType {
@@ -210,7 +270,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2.  3.
     online: true,
     on: true,
-    light: 1
+    light: 100
   },
   {
     address: 8675849037250,
@@ -219,7 +279,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 0.90
+    light: 90
   },
   {
     address: 8675849037250,
@@ -228,7 +288,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 0.88
+    light: 88
   },
   {
     address: 8675849037250,
@@ -237,7 +297,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: false,
-    light: 0.7
+    light: 70
   },
   {
     address: 8675849037250,
@@ -246,7 +306,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: false,
     on: true,
-    light: 0.5
+    light: 50
   },
   {
     address: 8675849037250,
@@ -255,7 +315,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: false,
-    light: 1
+    light: 100
   },
   {
     address: 8675849037250,
@@ -264,7 +324,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 1
+    light: 60
   },
   {
     address: 8675849037250,
@@ -273,7 +333,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: false,
     on: false,
-    light: 0.99
+    light: 99
   },
   {
     address: 8675849037250,
@@ -282,7 +342,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 1
+    light: 100
   },
   {
     address: 8675849037250,
@@ -291,7 +351,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 1
+    light: 96
   },
   {
     address: 8675849037250,
@@ -300,7 +360,7 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 0.4
+    light: 44
   },
   {
     address: 8675849037250,
@@ -309,6 +369,6 @@ const originSource = [
     // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
-    light: 0.5
+    light: 55
   },
 ];

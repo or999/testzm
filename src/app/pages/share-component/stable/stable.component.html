@@ -9,46 +9,54 @@
     >
     </d-column>
   </d-data-table> -->
-  <d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig" style="text-align: center;">
-    <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
-      <tr dTableRow>
-        <th dHeadCell>#</th>
-        <th dHeadCell *ngFor="let colOption of dataTableOptions.columns" style="text-align: center;">{{ colOption.header }}</th>
-      </tr>
-    </thead>
-    <tbody dTableBody>
-      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedIndex="nestedIndex">
-        <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
-          <td dTableCell class="devui-checkable-cell">
-            <d-checkbox [ngModelOptions]="{ standalone: true }" [ngModel]="rowItem.$checked"
-              (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
-              [halfchecked]="rowItem.$halfChecked" [disabled]="rowItem.$checkDisabled" dTooltip
-              [content]="rowItem.$checkBoxTips" [position]="['top', 'right', 'bottom', 'left']" [showAnimation]="false">
-            </d-checkbox>
-          </td>
-          <td dTableCell>{{ rowIndex + 1 }}</td>
-          <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
-            <!-- {{ colOption.fieldType === 'light' ? (rowItem[colOption.field] | percent ) : rowItem[colOption.field] }} -->
-            <span [ngSwitch]="colOption.fieldType">
+  <d-button bsStyle="primary" (click)="openPreventCloseModal()" style="float: right;">添加</d-button>
+  <br>
+<d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig" style="text-align: center;">
+  <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
+    <tr dTableRow>
+      <th dHeadCell>#</th>
+      <th dHeadCell *ngFor="let colOption of dataTableOptions.columns" style="text-align: center;">
+        {{ colOption.header }}</th>
+    </tr>
+  </thead>
+  <tbody dTableBody>
+    <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedIndex="nestedIndex">
+      <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+        <td dTableCell class="devui-checkable-cell">
+          <d-checkbox [ngModelOptions]="{ standalone: true }" [ngModel]="rowItem.$checked"
+            (ngModelChange)="onRowCheckChange($event, rowIndex, nestedIndex, rowItem)"
+            [halfchecked]="rowItem.$halfChecked" [disabled]="rowItem.$checkDisabled" dTooltip
+            [content]="rowItem.$checkBoxTips" [position]="['top', 'right', 'bottom', 'left']" [showAnimation]="false">
+          </d-checkbox>
+        </td>
+        <td dTableCell>{{ rowIndex + 1 }}</td>
+        <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+          <!-- {{ colOption.fieldType === 'light' ? (rowItem[colOption.field] | percent ) : rowItem[colOption.field] }} -->
+          <span [ngSwitch]="colOption.fieldType">
             <p *ngSwitchCase="'light'">
-              <d-progress [percentage]="rowItem[colOption.field]*100" [percentageText]="''+rowItem[colOption.field]*100+'%'"> </d-progress>
+              <d-slider [(ngModel)]="rowItem[colOption.field]" [min]="0" [max]="100" class="slider"
+                (ngModelChange)="lightChange(rowItem)"></d-slider>
+              <input [(ngModel)]="rowItem[colOption.field]" style="width: 50px;border: #bfc1c1 1px solid;border-radius: 15px;text-align: center;" />
+              <!-- <d-progress [percentage]="rowItem[colOption.field]*100" [percentageText]="''+rowItem[colOption.field]*100+'%'"> </d-progress> -->
             </p>
             <p *ngSwitchCase="'on'">
-              <d-toggle [(ngModel)]="rowItem[colOption.field]" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'sm'" style="line-height: 100%;"></d-toggle>
+              <d-toggle [(ngModel)]="rowItem[colOption.field]" [beforeChange]="beforeChange"
+                (change)="onChange2(rowItem)" [size]="'sm'" style="line-height: 100%;"></d-toggle>
             </p>
             <p *ngSwitchCase="'online'">
-              <d-toggle [(ngModel)]="rowItem[colOption.field]" [beforeChange]="beforeChange" (change)="onChange2($event)" [size]="'sm'" style="line-height: 100%;"></d-toggle>
+              <d-toggle [(ngModel)]="rowItem[colOption.field]" [beforeChange]="beforeChange"
+                (change)="onChange2(rowItem)" [size]="'sm'" style="line-height: 100%;"></d-toggle>
             </p>
             <p *ngSwitchDefault>
               {{rowItem[colOption.field]}}
             </p>
-            </span>
-          </td>
-        </tr>
-      </ng-template>
-    </tbody>
-  </d-data-table> 
-   <d-pagination class="page-nation" [size]="'sm'" [total]="pager.total" [pageSize]="pager.pageSize"
-    [showPageSelector]="false" [totalItemText]="'总条数'" [(pageIndex)]="pager.pageIndex" [canViewTotal]="true" [lite]="true"
-    (pageIndexChange)="onPageIndexChange($event)">
-  </d-pagination>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</d-data-table>
+<d-pagination class="page-nation" [size]="'sm'" [total]="pager.total" [pageSize]="pager.pageSize"
+  [showPageSelector]="false" [totalItemText]="'总条数'" [(pageIndex)]="pager.pageIndex" [canViewTotal]="true" [lite]="true"
+  (pageIndexChange)="onPageIndexChange($event)">
+</d-pagination>

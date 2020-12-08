@@ -1,0 +1,58 @@
+<div (click)="onClick($event)">
+  <form  dForm
+  ngForm [layout]="'vertical'"
+  [dValidateRules]="{ message: '表单校验不通过，请检查' }"
+  #lightForm="dValidateRules"
+  (dSubmit)="submitForm($event)"
+  >
+    <d-form-item>
+      <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是唯一标识符'">灯具名称：</d-form-label>
+      <d-form-control>
+        <input dTextInput name="lightName" [(ngModel)]="formData.lightName" [dValidateRules]="[{ required: true }]" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">灯具类型：</d-form-label>
+      <d-form-control>
+        <input dTextInput name="lightType" [(ngModel)]="formData.lightType" [dValidateRules]="[{ required: true }]" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">灯控器地址：</d-form-label>
+      <d-form-control>
+        <input dNumberInput name="lightAddress" [(ngModel)]="formData.lightAddress" [dValidateRules]="[{ required: true }]"/>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">亮度：</d-form-label>
+      <d-form-control>
+        <input dNumberInput name="light" [(ngModel)]="formData.light" [dValidateRules]="[{ required: true }]" />
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label [required]="true">经纬度：</d-form-label>
+      <d-form-control>
+        <input dTextInput name="lightLocation" [(ngModel)]="formData.lightLocation" [dValidateRules]="[{ required: true ,message:'输入经纬度，才能在地图上显示哦！'}]"/>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>在线</d-form-label>
+      <d-form-control>
+        <d-toggle name="online" [(ngModel)]="formData.online"></d-toggle>
+      </d-form-control>
+    </d-form-item>
+    <d-form-item>
+      <d-form-label>开关</d-form-label>
+      <d-form-control>
+        <d-toggle name="on" [(ngModel)]="formData.on"></d-toggle>
+      </d-form-control>
+    </d-form-item>
+    <d-form-operation>
+      <d-button class="mr-element-spacing" [title]="lightForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
+      [showLoading]="lightForm.pending"
+        >提交</d-button
+      >
+      <d-button bsStyle="common" circled="true" dFormReset>重置</d-button>
+    </d-form-operation>
+  </form>
+  </div>

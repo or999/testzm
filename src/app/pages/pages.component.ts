@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
+import { MapService } from '../core/amap/map.service';
 import { UserService } from '../core/user/user.service';
 import { menu, IMenuType } from './pages-menu';
 
@@ -12,7 +13,7 @@ import { menu, IMenuType } from './pages-menu';
 })
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private mapService: MapService) { }
   msgs: Array<object> = [];
   menu: IMenuType[];
   key = {
@@ -51,7 +52,13 @@ export class PagesComponent implements OnInit {
         this.hoverCard.push(item.title);
       }
     });
+    this.mapService.getWeather().subscribe((data) => {
+      console.log(data);
+    }, (error) => {
+        console.log('error');
+    });
   }
+
   itemClick(event): void {
     // console.log(event);
     const selectedItem = event.item;

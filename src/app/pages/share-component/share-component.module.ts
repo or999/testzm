@@ -4,11 +4,12 @@ import { StableComponent } from './stable/stable.component';
 import { DateSelectComponent } from './date-select/date-select.component';
 import { DevUIModule } from 'ng-devui';
 import { FormsModule } from '@angular/forms';
+import { TableFormComponent } from './table-form/table-form.component';
 
 
 
 @NgModule({
-  declarations: [StableComponent, DateSelectComponent],
+  declarations: [StableComponent, DateSelectComponent, TableFormComponent],
   imports: [
     CommonModule,
     DevUIModule,

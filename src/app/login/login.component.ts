@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { LoadingType } from 'ng-devui/loading';
 import { delay } from 'rxjs/operators';
+import { MapService } from '../core/amap/map.service';
 import { UserService } from '../core/user/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  // providers: [MapService]
 })
 export class LoginComponent implements OnInit {
   isAlphabetPattern = /^[a-zA-Z]+(\s+[a-zA-Z]+)*$/;
@@ -16,10 +18,10 @@ export class LoginComponent implements OnInit {
     userPassword: '',
   };
   loading: LoadingType = undefined;
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private mapService: MapService) {
   }
   ngOnInit(): void {
-    // this.userService.getWeather().subscribe( (res) => { console.log((res as any).status); });
+    this.mapService.getWeather().subscribe((res) => { console.log(res); });
   }
   logIn(name, password): void {
     // TODO:订阅user服务里的可观察对象，
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.userService.setLogin(name, password).pipe(delay(1000)).subscribe(
         () => {
           if (this.userService.isLogin) {
-            this.router.navigate([this.userService.redirectUrl]).then( () => {
+            this.router.navigate([this.userService.redirectUrl]).then(() => {
 
             });
             // console.log(this.userService.redirectUrl);

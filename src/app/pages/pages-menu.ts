@@ -39,11 +39,11 @@ const menu: Array<IMenuType> = [
     link: 'pagenotfound'
   },
   {
-    title: '内容五',
+    title: '分组',
     icon: 'icon-loading',
     active: false,
     children: [
-      { title: '子内容1', active: false, link: 'child1' },
+      { title: '分组列表', active: false, link: 'grouplist' },
     ],
   },
   {

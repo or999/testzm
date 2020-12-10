@@ -3,7 +3,6 @@ import { ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
 import { DialogService } from 'ng-devui/modal';
-import { interval } from 'rxjs';
 import { TableFormComponent } from '../table-form/table-form.component';
 @Component({
   selector: 'app-stable',

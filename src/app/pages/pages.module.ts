@@ -13,10 +13,11 @@ import { ShareComponentModule } from './share-component/share-component.module';
 import { Child1Component } from './child1/child1.component';
 import { Child2Component } from './child2/child2.component';
 import { MapService } from '../core/amap/map.service';
+import { GrouplistComponent } from './grouplist/grouplist.component';
 
 @NgModule({
   declarations: [PagesComponent, DashboardComponent, PagenotfoundComponent,
-    TableComponent, MapComponent, Child1Component, Child2Component],
+    TableComponent, MapComponent, Child1Component, Child2Component, GrouplistComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

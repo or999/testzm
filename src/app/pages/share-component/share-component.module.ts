@@ -5,11 +5,12 @@ import { DateSelectComponent } from './date-select/date-select.component';
 import { DevUIModule } from 'ng-devui';
 import { FormsModule } from '@angular/forms';
 import { TableFormComponent } from './table-form/table-form.component';
+import { GroupComponent } from './group/group.component';
 
 
 
 @NgModule({
-  declarations: [StableComponent, DateSelectComponent, TableFormComponent],
+  declarations: [StableComponent, DateSelectComponent, TableFormComponent, GroupComponent],
   imports: [
     CommonModule,
     DevUIModule,

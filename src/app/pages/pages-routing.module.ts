@@ -5,6 +5,7 @@ import { UserGuard } from '../core/user/user.guard';
 import { Child1Component } from './child1/child1.component';
 import { Child2Component } from './child2/child2.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GrouplistComponent } from './grouplist/grouplist.component';
 import { MapComponent } from './map/map.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PagesComponent } from './pages.component';
@@ -35,6 +36,10 @@ const routes: Routes = [{
     {
       path: 'child2',
       component: Child2Component
+    },
+    {
+      path: 'grouplist',
+      component: GrouplistComponent
     },
     {
       path: 'superroot',

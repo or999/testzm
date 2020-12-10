@@ -20,13 +20,14 @@
     <d-form-item>
       <d-form-label [required]="true">灯控器地址：</d-form-label>
       <d-form-control>
-        <input dNumberInput name="lightAddress" [(ngModel)]="formData.lightAddress" [dValidateRules]="[{ required: true }]"/>
+        <input dTextInput name="lightAddress" [(ngModel)]="formData.lightAddress" [dValidateRules]="[{ required: true }]"/>
       </d-form-control>
     </d-form-item>
     <d-form-item>
       <d-form-label [required]="true">亮度：</d-form-label>
       <d-form-control>
-        <input dNumberInput name="light" [(ngModel)]="formData.light" [dValidateRules]="[{ required: true }]" />
+        <d-input-number name="light"  [min]="0"
+        [max]="100" [(ngModel)]="formData.light" [dValidateRules]="[{ required: true }]"></d-input-number>
       </d-form-control>
     </d-form-item>
     <d-form-item>

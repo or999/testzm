@@ -10,10 +10,11 @@ import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { PrintTableComponent } from './print-table/print-table.component';
 // TODO:import { httpInterceptorProviders } from './http-interceptors';
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent
+    AppComponent, LoginComponent, PrintTableComponent
   ],
   imports: [
     BrowserModule,

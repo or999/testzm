@@ -11,6 +11,7 @@
   </d-data-table> -->
   <d-button bsStyle="primary" (click)="openPreventCloseModal()" style="float: right;">添加</d-button>
   <br>
+  <d-button (click)="printData()">打印表格数据</d-button>
 <d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig" style="text-align: center;">
   <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
     <tr dTableRow>

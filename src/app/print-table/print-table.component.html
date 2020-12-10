@@ -1,0 +1,14 @@
+<h1 style="margin: 30px auto; width: 100%;text-align: center;">print</h1>
+<div style="width: 80%; margin: 10px auto;">
+    <d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [type]="'striped'">
+        <d-column field="$index" header="#" [width]="'50px'"></d-column>
+        <d-column
+          *ngFor="let colOption of dataTableOptions.columns"
+          [field]="colOption.field"
+          [header]="colOption.header"
+          [fieldType]="colOption.fieldType"
+          [width]="'150px'"
+        >
+        </d-column>
+      </d-data-table>
+</div>

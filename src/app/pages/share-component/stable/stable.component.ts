@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
 import { DialogService } from 'ng-devui/modal';
 import { interval } from 'rxjs';
@@ -10,7 +11,7 @@ import { TableFormComponent } from '../table-form/table-form.component';
   styleUrls: ['./stable.component.css']
 })
 export class StableComponent implements OnInit {
-  constructor(private dialogService: DialogService) { }
+  constructor(private dialogService: DialogService,private router:Router) { }
   // TODO:父组件通过viewchild与子组件通信，使用子组件d-data-table 的公用方法
   // TODO:通过viewchild也可引用本地变量
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
@@ -251,6 +252,13 @@ export class StableComponent implements OnInit {
       });
     });
   }
+  printData(): void{
+    // this.router.navigateByUrl('/print?originSource='+JSON.stringify(originSource))
+    this.router.navigate(['/print'], {
+      queryParams: { originSource: JSON.stringify(originSource) }
+    });
+  }
+
 
 }
 interface SourceType {

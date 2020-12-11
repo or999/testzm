@@ -34,7 +34,13 @@ export class GrouplistComponent implements OnInit {
             header: '分组元素数量',
             fieldType: 'number',
             order: 3
-        }
+      },
+      {
+        field: 'groupTaskCount',
+        header: '任务数量',
+        fieldType: 'number',
+        order: 4
+    }
     ]
   };
   openPreventCloseModal(type?: string, data?: any): void {

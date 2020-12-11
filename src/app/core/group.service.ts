@@ -20,7 +20,9 @@ interface Group {
   groupName: string;
   groupDescribe: string;
   groupChild: number,
-  groupElement:any[]
+  groupElement: any[],
+  groupTask?: any[],
+  groupTaskCount?:number
 }
 interface Source{
   id: number;
@@ -32,7 +34,9 @@ const data = [
     groupName:'分组一',
     groupDescribe: '这是一个测试分组的描述',
     groupChild: 0,
-    groupElement:[]
+    groupElement: [],
+    groupTask: [],
+    groupTaskCount:0
     },
   {
       id:2,
@@ -42,7 +46,11 @@ const data = [
     groupElement:[ {
       id: 1,
       label: 'HNJS-0001'
-    },]
+    },],
+    groupTask: [],
+    groupTaskCount:0
+    
+
       
     },
   {
@@ -53,8 +61,9 @@ const data = [
     groupElement:[ {
       id: 1,
       label: 'HNJS-0001'
-    }]
-      
+    }],
+    groupTask: [{id:1,'label':'任务一'}],
+    groupTaskCount:1
     }
 ]
 const originSource = [

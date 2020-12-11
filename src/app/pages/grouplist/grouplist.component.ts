@@ -11,7 +11,7 @@ import { GroupComponent } from '../share-component/group/group.component';
   styleUrls: ['./grouplist.component.css']
 })
 export class GrouplistComponent implements OnInit {
-
+  formData: any;
   basicDataSource: Group[] = null;
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
   constructor(private dialogService:DialogService,private groupService:GroupService) { }
@@ -37,7 +37,9 @@ export class GrouplistComponent implements OnInit {
         }
     ]
   };
-  openPreventCloseModal(type?:string,data?:any): void {
+  openPreventCloseModal(type?: string, data?: any): void {
+    const _this=this
+    
     const results = this.dialogService.open({
       id: type && type === 'edit'?'edit':'dialog-service',
       width: '500px',
@@ -55,12 +57,21 @@ export class GrouplistComponent implements OnInit {
           handler: ($event: Event) => {
             results.modalInstance.hide();
             //  TODO: 弹窗关闭之后，在这里重新请求数据
+            
           },
 
         }
       ],
       data: {
-       item:data||null
+        item: data || null,
+        getForm: (formData) => {
+          type ? _this.basicDataSource.forEach((item, index) => {
+            if (formData.id===item.id) {
+             this.basicDataSource.splice(index,1,formData)
+            }
+          }):_this.basicDataSource.push(formData)
+          // console.log(_this.basicDataSource);
+        }
       },
     });
   }
@@ -84,7 +95,6 @@ export class GrouplistComponent implements OnInit {
   editGroup() {
     // TODO:编辑分组
     const rows = this.datatable.getCheckedRows();
-    console.log(rows);
     const length=rows.length
     switch (length) {
       case 0:
@@ -100,6 +110,7 @@ export class GrouplistComponent implements OnInit {
   }
 }
 interface Group {
+  id: number;
   groupName: string;
   groupDescribe: string;
   groupChild:number

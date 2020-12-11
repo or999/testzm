@@ -30,9 +30,9 @@ export class GroupComponent implements OnInit {
   }
   submitForm({valid}): void{
     if (valid) {
-      let id=this.data.item?.id ? this.data.item.id: 10
+      let id = this.data.item?.id ? this.data.item.id : Math.floor(Math.random()*1000)      
       let group={...this.formData,groupChild:this.formData.groupElement.length,id}
-      console.log(group);
+      this.data.getForm(group)
       of(this.formData).pipe(
         map((val) => 'success'),  // 模拟接口处理
         delay(500)

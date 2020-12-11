@@ -30,6 +30,7 @@
                     labelization: { enable: true, labelMaxWidth: '120px' }
                   }"
                   [ngModel]="formData.groupElement"
+                  [dValidateRules]="[{ required: true }]"
                 ></d-select>
               </d-form-control>
       </d-form-item>

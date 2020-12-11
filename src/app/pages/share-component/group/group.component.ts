@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { map, delay } from 'rxjs/operators';
+import { GroupService } from 'src/app/core/group.service';
 
 @Component({
   selector: 'app-group',
@@ -6,59 +9,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit { 
-  selectOptions= originSource
-  formData: Group = {
-    groupName:'as',
-    groupDescribe: 'as',
-    groupChild: 0,
+  selectOptions:any
+  formData = {
+    groupName:'分组一',
+    groupDescribe: '描述',
     groupElement: [{id:1,'label':'HNJS-0001'}]
   }
-  constructor() { }
+  @Input() data: any;
+  constructor(private groupService:GroupService) { }
   ngOnInit(): void {
+    let item=this.data.item
+    if (item) {
+      this.formData.groupName = item.groupName
+      this.formData.groupElement = item.groupElement
+      this.formData.groupDescribe=item.groupDescribe
+    }
+    this.groupService.getSource().subscribe(data => {
+     this.selectOptions=data
+   })
+  }
+  submitForm({valid}): void{
+    if (valid) {
+      let id=this.data.item?.id ? this.data.item.id: 10
+      let group={...this.formData,groupChild:this.formData.groupElement.length,id}
+      console.log(group);
+      of(this.formData).pipe(
+        map((val) => 'success'),  // 模拟接口处理
+        delay(500)
+      ).subscribe((res) => {
+        if (res === 'success') {
+          console.log('success', '成功', '添加成功');
+        }
+      });
+    } else {
+      console.log('error', '错误', '请检查所有校验项是否通过');
+    }
+  }
    
-  }
-  submitForm(event): void{
-    console.log(event);
-    
-  }
 }
-interface Group {
-  groupName: string;
-  groupDescribe: string;
-  groupChild: number;
-  groupElement?:any[]
-}
-interface SourceType {
-  address: number;
-  name: string;
-  type: string;
-  online: boolean;
-  on: boolean;
-  light: number;
-}
-const originSource = [
-   {
-    id: 1,
-    label: 'HNJS-0001'
-  },
-  {
-    id: 2,
-    label: 'HNJS-0002'
-  },
-  {
-    id: 3,
-    label: 'HNJS-0003'
-  },
-  {
-    id: 4,
-    label: 'HNJS-0004'
-  },
-  {
-    id: 5,
-    label: 'HNJS-0005'
-  },
-  {
-    id: 6,
-    label: 'HNJS-0006'
-  },
-];

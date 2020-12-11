@@ -52,11 +52,11 @@ export class PagesComponent implements OnInit {
         this.hoverCard.push(item.title);
       }
     });
-    this.mapService.getWeather().subscribe((data) => {
-      console.log(data);
-    }, (error) => {
-        console.log('error');
-    });
+    // this.mapService.getWeather().subscribe((data) => {
+    //   console.log(data);
+    // }, (error) => {
+    //     console.log('error');
+    // });
   }
 
   itemClick(event): void {

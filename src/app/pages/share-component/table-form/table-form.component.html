@@ -8,19 +8,19 @@
     <d-form-item>
       <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是唯一标识符'">灯具名称：</d-form-label>
       <d-form-control>
-        <input dTextInput name="lightName" [(ngModel)]="formData.lightName" [dValidateRules]="[{ required: true }]" />
+        <input dTextInput name="name" [(ngModel)]="formData.name" [dValidateRules]="[{ required: true }]" />
       </d-form-control>
     </d-form-item>
     <d-form-item>
       <d-form-label [required]="true">灯具类型：</d-form-label>
       <d-form-control>
-        <input dTextInput name="lightType" [(ngModel)]="formData.lightType" [dValidateRules]="[{ required: true }]" />
+        <input dTextInput name="type" [(ngModel)]="formData.type" [dValidateRules]="[{ required: true }]" />
       </d-form-control>
     </d-form-item>
     <d-form-item>
       <d-form-label [required]="true">灯控器地址：</d-form-label>
       <d-form-control>
-        <input dTextInput name="lightAddress" [(ngModel)]="formData.lightAddress" [dValidateRules]="[{ required: true }]"/>
+        <input dTextInput name="address" [(ngModel)]="formData.address" [dValidateRules]="[{ required: true }]"/>
       </d-form-control>
     </d-form-item>
     <d-form-item>
@@ -33,7 +33,7 @@
     <d-form-item>
       <d-form-label [required]="true">经纬度：</d-form-label>
       <d-form-control>
-        <input dTextInput name="lightLocation" [(ngModel)]="formData.lightLocation" [dValidateRules]="[{ required: true ,message:'输入经纬度，才能在地图上显示哦！'}]"/>
+        <input dTextInput name="location" [(ngModel)]="formData.location" [dValidateRules]="[{ required: true ,message:'输入经纬度，才能在地图上显示哦！'}]"/>
       </d-form-control>
     </d-form-item>
     <d-form-item>

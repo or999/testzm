@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  Input,  OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
@@ -8,14 +8,15 @@ import { delay, map } from 'rxjs/operators';
   styleUrls: ['./table-form.component.scss']
 })
 export class TableFormComponent implements OnInit {
+  @Input() data:any
   formData: FormData = {
-    lightName: '',
-    lightType: '',
+    name: '',
+    type: '',
     light: 100,
-    lightAddress: 1234567890,
+    address: 1234567890,
     on: true,
     online: true,
-    lightLocation: '',
+    location: '',
   };
   constructor() { }
   ngOnInit(): void {
@@ -27,9 +28,10 @@ export class TableFormComponent implements OnInit {
     // console.log(this.formData);
   }
   submitForm({ valid, directive }): void {
-    console.log(directive);
+    // console.log(directive);
     if (valid) {
       console.log(this.formData);
+      this.data.getFormdata(this.formData)
       of(this.formData).pipe(
         map((val) => 'success'),  // 模拟接口处理
         delay(500)
@@ -44,12 +46,12 @@ export class TableFormComponent implements OnInit {
   }
 }
 interface FormData {
-  lightName: string;
-  lightType: string;
+  name: string;
+  type: string;
   light: number;
-  lightAddress: number;
+  address: number;
   on: boolean;
   online: boolean;
-  lightLocation: string;
+  location: string;
 
 }

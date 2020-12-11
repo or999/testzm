@@ -194,6 +194,7 @@ export class StableComponent implements OnInit {
     });
   }
   openPreventCloseModal(): void {
+    const _this=this
     const results = this.dialogService.open({
       id: 'dialog-service',
       width: '500px',
@@ -215,6 +216,11 @@ export class StableComponent implements OnInit {
 
         }
       ],
+      data: {
+        getFormdata: (formData) => {
+          _this.basicDataSource.unshift(formData)
+        }
+      }
     });
   }
 

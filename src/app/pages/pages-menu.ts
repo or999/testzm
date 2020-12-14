@@ -44,6 +44,7 @@ const menu: Array<IMenuType> = [
     active: false,
     children: [
       { title: '分组列表', active: false, link: 'grouplist' },
+      { title: '任务列表', active: false, link: 'tasklist' },
     ],
   },
   {

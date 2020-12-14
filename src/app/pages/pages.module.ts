@@ -12,12 +12,12 @@ import { MapComponent } from './map/map.component';
 import { ShareComponentModule } from './share-component/share-component.module';
 import { Child1Component } from './child1/child1.component';
 import { Child2Component } from './child2/child2.component';
-import { MapService } from '../core/amap/map.service';
 import { GrouplistComponent } from './grouplist/grouplist.component';
+import { TasklistComponent } from './tasklist/tasklist.component';
 
 @NgModule({
   declarations: [PagesComponent, DashboardComponent, PagenotfoundComponent,
-    TableComponent, MapComponent, Child1Component, Child2Component, GrouplistComponent],
+    TableComponent, MapComponent, Child1Component, Child2Component, GrouplistComponent, TasklistComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

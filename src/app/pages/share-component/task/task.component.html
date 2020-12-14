@@ -6,41 +6,41 @@
     (dSubmit)="submitForm($event)"
     >
       <d-form-item>
-        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是唯一标识符'">分组名称：</d-form-label>
+        <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'这是唯一标识符'">任务名称：</d-form-label>
         <d-form-control>
-          <input dTextInput name="groupName" [(ngModel)]="formData.groupName" [dValidateRules]="[{ required: true }]" />
+          <input dTextInput name="taskName" [(ngModel)]="formData.taskName" [dValidateRules]="[{ required: true }]" />
         </d-form-control>
       </d-form-item>
       <d-form-item>
-        <d-form-label [required]="true">分组描述：</d-form-label>
+        <d-form-label [required]="true">任务描述：</d-form-label>
         <d-form-control>
-          <input dTextInput name="groupDescribe" [(ngModel)]="formData.groupDescribe" [dValidateRules]="[{ required: true }]" />
+          <input dTextInput name="taskDescribe" [(ngModel)]="formData.taskDescribe" [dValidateRules]="[{ required: true }]" />
         </d-form-control>
       </d-form-item>
       <d-form-item>
-        <d-form-label [required]="true">选择元素：</d-form-label>
+        <d-form-label [required]="true">任务操作：</d-form-label>
               <d-form-control>
                 <d-select
                   name="groupElement"
-                  [options]="selectOptions"
+                  [options]="selectOptionsTask"
                   [filterKey]="'label'"
                   [isSearch]="true"
-                  [multiple]="true"
+                  [multiple]="false"
                   [extraConfig]="{
                     labelization: { enable: true, labelMaxWidth: '120px' }
                   }"
-                  [(ngModel)]="formData.groupElement"
+                  [(ngModel)]="formData.taskdo"
                   [dValidateRules]="[{ required: true }]"
                 ></d-select>
               </d-form-control>
       </d-form-item>
-      <d-form-item>
+      <!-- <d-form-item>
         <d-form-label [required]="true">选择任务：</d-form-label>
               <d-form-control>
                 <d-select
                   name="groupTask"
                   [options]="selectOptionsTask"
-                  [filterKey]="'taskName'"
+                  [filterKey]="'label'"
                   [isSearch]="true"
                   [multiple]="true"
                   [extraConfig]="{
@@ -50,7 +50,7 @@
                   [dValidateRules]="[{ required: true }]"
                 ></d-select>
               </d-form-control>
-      </d-form-item>
+      </d-form-item> -->
       <d-form-operation>
         <d-button class="mr-element-spacing" [title]="lightForm.errorMessage || ''" circled="true" style="margin-right: 8px" dFormSubmit
         [showLoading]="lightForm.pending"

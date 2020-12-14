@@ -4,42 +4,37 @@ import { map, delay } from 'rxjs/operators';
 import { GroupService } from 'src/app/core/group.service';
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.css']
 })
-export class GroupComponent implements OnInit { 
-  selectOptionsTask:any;
-  selectOptions:any;
+export class TaskComponent implements OnInit {
+
+  selectOptionsTask: any;
   formData = {
-    groupName:'分组一',
-    groupDescribe: '描述',
-    groupElement: [{ id: 1, label: 'HNJS-0001' }],
-    groupTask:[]
+    taskName:'任务一',
+    taskDescribe: '描述',
+    taskdo: { id: 1, label: '操作一' },
   }
   @Input() data: any;
   constructor(private groupService:GroupService) { }
   ngOnInit(): void {
     let item=this.data.item
     if (item) {
-      this.formData.groupName = item.groupName
-      this.formData.groupElement = item.groupElement
-      this.formData.groupDescribe = item.groupDescribe
-      this.formData.groupTask=item.groupTask
+      this.formData.taskName = item.taskName
+      this.formData.taskdo = item.taskdo
+      this.formData.taskDescribe = item.taskDescribe
     }
-    this.groupService.getTasks().subscribe(data => {
+    this.groupService.getActions().subscribe(data => {
      this.selectOptionsTask=data
     })
-    this.groupService.getSource().subscribe(data => {
-      this.selectOptions=data
-     })
     
   }
   submitForm({valid}): void{
     if (valid) {
       let id = this.data.item?.id ? this.data.item.id : Math.floor(Math.random()*1000)      
-      let group={...this.formData,groupChild:this.formData.groupElement.length,id,groupTaskCount:this.formData.groupTask.length}
-      this.data.getForm(group)
+       let group={...this.formData,id,actionLabel:this.formData.taskdo.label}
+       this.data.getForm(group)
       of(this.formData).pipe(
         map((val) => 'success'),  // 模拟接口处理
         delay(500)

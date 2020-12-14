@@ -14,6 +14,12 @@ export class GroupService {
     return of(originSource).pipe(
     )
   }
+  getTasks(): Observable<any[]>{
+    return of(tasks)
+  }
+  getActions(): Observable<any[]>{
+    return of(actions)
+  }
 }
 interface Group {
   id: number;
@@ -27,7 +33,8 @@ interface Group {
 interface Source{
   id: number;
   label:string
- }
+}
+//  TODO:分组数据
 const data = [
   {
     id:1,
@@ -62,10 +69,11 @@ const data = [
       id: 1,
       label: 'HNJS-0001'
     }],
-    groupTask: [{id:1,'label':'任务一'}],
+    groupTask: [{id:1,taskName:'任务一'}],
     groupTaskCount:1
     }
 ]
+// TODO:灯具数据
 const originSource = [
   {
    id: 1,
@@ -92,3 +100,30 @@ const originSource = [
    label: 'HNJS-0006'
  },
 ];
+// TODO:任务数据
+const tasks = [
+  {
+    id:1,
+    taskName: '任务一',
+    taskDescribe: '描述',
+    taskdo: { id: 2, label: '操作二' },
+    actionLabel: '操作二',
+    actionTime:''
+    
+  },
+  {
+    id:2,
+    taskName: '任务二',
+    taskDescribe: '描述',
+    taskdo: { id: 1, label: '操作一' },
+    actionLabel: '操作一',
+    actionTime:''
+    
+  }
+]
+const actions = [
+  {id:1,label:'操作一'},
+  {id:2,label:'操作二'},
+  {id:3,label:'操作三'},
+  {id:4,label:'操作四'},
+]

@@ -11,6 +11,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PagesComponent } from './pages.component';
 import { SuperrootComponent } from './superroot/superroot.component';
 import { TableComponent } from './table/table.component';
+import { TasklistComponent } from './tasklist/tasklist.component';
 
 const routes: Routes = [{
   path: '',
@@ -40,6 +41,10 @@ const routes: Routes = [{
     {
       path: 'grouplist',
       component: GrouplistComponent
+    },
+    {
+      path: 'tasklist',
+      component: TasklistComponent
     },
     {
       path: 'superroot',

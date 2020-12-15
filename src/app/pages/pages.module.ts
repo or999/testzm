@@ -14,10 +14,12 @@ import { Child1Component } from './child1/child1.component';
 import { Child2Component } from './child2/child2.component';
 import { GrouplistComponent } from './grouplist/grouplist.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import { WarningComponent } from './warning/warning.component';
+import { WsettingComponent } from './wsetting/wsetting.component';
 
 @NgModule({
   declarations: [PagesComponent, DashboardComponent, PagenotfoundComponent,
-    TableComponent, MapComponent, Child1Component, Child2Component, GrouplistComponent, TasklistComponent],
+    TableComponent, MapComponent, Child1Component, Child2Component, GrouplistComponent, TasklistComponent, WarningComponent, WsettingComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

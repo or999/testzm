@@ -12,6 +12,8 @@ import { PagesComponent } from './pages.component';
 import { SuperrootComponent } from './superroot/superroot.component';
 import { TableComponent } from './table/table.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import { WarningComponent } from './warning/warning.component';
+import { WsettingComponent } from './wsetting/wsetting.component';
 
 const routes: Routes = [{
   path: '',
@@ -45,6 +47,14 @@ const routes: Routes = [{
     {
       path: 'tasklist',
       component: TasklistComponent
+    },
+    {
+      path: 'warning',
+      component: WarningComponent
+    },
+    {
+      path: 'wsetting',
+      component: WsettingComponent
     },
     {
       path: 'superroot',

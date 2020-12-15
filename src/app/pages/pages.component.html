@@ -39,7 +39,7 @@
     
   </d-layout> -->
   
-  <d-layout>
+  <d-layout style="height: 100%;">
     <d-header>
       <div class="logo">
         <span class="logo-devui">
@@ -103,10 +103,11 @@
               <router-outlet></router-outlet>
               <d-toast [value]="msgs"></d-toast>
             </div>
+            <d-footer>footer</d-footer>
           </div>
         </d-splitter-pane>
       </d-splitter>
     </d-layout>
-    <d-footer>footer</d-footer>
+   
     
   </d-layout> 

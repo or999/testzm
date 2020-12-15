@@ -52,6 +52,15 @@ const menu: Array<IMenuType> = [
     icon: 'icon-gps',
     active: false,
     link: 'superroot'
+  },
+  {
+    title: '事件告警',
+    icon: 'icon-warning-o',
+    active: false,
+    children: [
+      { title: '事件告警', active: false, link: 'warning' },
+      { title: '告警设置', active: false, link: 'wsetting' },
+    ],
   }
 ];
 export { IMenuType, menu };

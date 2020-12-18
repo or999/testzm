@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-date-select',
@@ -8,15 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class DateSelectComponent implements OnInit {
 
   constructor() { }
-
-  datePicker1: any;
-
+  @Output() date:EventEmitter<any> = new EventEmitter()
   startDate = new Date();
   endDate = null;
   ngOnInit(): void {
   }
   getValue(value): void {
-    console.log(value);
+      this.date.emit({startDate:this.startDate,endDate:this.endDate})
+    // console.log(value);
   }
   getDay(num: number, str = '-'): string {
     const day = new Date();
@@ -32,7 +31,12 @@ export class DateSelectComponent implements OnInit {
   }
 
   getNextWeekday(num: number, str = '-'): string {
-    const day = this.startDate;
+    let day;
+    if (this.startDate) {
+       day = this.startDate;
+    } else {
+      day=this.endDate||new Date()
+    }
     const nowTime = day.getTime();
     const ms = 24 * 3600 * 1000 * num;
     day.setTime(Math.floor(nowTime + ms));
@@ -41,7 +45,8 @@ export class DateSelectComponent implements OnInit {
     if (oMoth.length <= 1) { oMoth = '0' + oMoth; }
     let oDay = day.getDate().toString();
     if (oDay.length <= 1) { oDay = '0' + oDay; }
-    return oYear + str + oMoth + str + oDay;
+      return oYear + str + oMoth + str + oDay;
+   
   }
 
 }

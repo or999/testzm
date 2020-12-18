@@ -1,27 +1,58 @@
-<section>
-    <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID" (activeTabChange)="activeTabChange($event)">
-      <d-tab id="tab1" title="控制柜" tabId="tab1">
-        <ng-template dTabContent>
-          <p>
-            这是Tab1的内容
-          </p>
-        </ng-template>
-      </d-tab>
-  
-      <d-tab id="tab2" title="灯具" tabId="tab2">
-        <ng-template dTabContent>
-          <p>
-            这是Tab2的内容
-          </p>
-        </ng-template>
-      </d-tab>
-  
-      <d-tab id="tab3" title="其它" tabId="tab3">
-        <ng-template dTabContent>
-          <p>
-            这是Tab3的内容
-          </p>
-        </ng-template>
-      </d-tab>
-    </d-tabs>
-  </section>
+<div style="display: flex;justify-content: space-around;flex-wrap: wrap;align-items: center;margin-bottom: 20px; ">
+  <div>时间范围:</div>
+  <app-date-select (date)="getDate($event)"></app-date-select> 
+  <div>告警等级:</div>
+  <d-select
+        [options]="options1"
+        [isSearch]="true"
+        [filterKey]="'label'"
+        [(ngModel)]="currentOption1"
+        [placeholder]="'Search'"
+        [extraConfig]="{ labelization: { enable: true } }"
+        (valueChange)=rankChange()
+      ></d-select>
+      <div>实时状态:</div>
+  <d-select
+  [readonly]="true"
+  [extraConfig]="{ labelization: { enable: true} }"
+        [options]="options3"
+        [isSearch]="true"
+        [filterKey]="'label'"
+        [(ngModel)]="currentOption3"
+        [placeholder]="'Search'"
+        (valueChange)=statusChange()
+      ></d-select>
+  <div>告警类型:</div>
+  <d-tree-select 
+  placeholder="Standard Input"
+  [treeData]="options2"
+  [expandTree]="true"
+  [(ngModel)]="value2"
+  [leafOnly]="true"
+  (ngModelChange)="showSelected($event)"
+  (nodeToggleEvent)="nodeToggleEvent($event)"
+  style="width: 300px;overflow: auto;"
+></d-tree-select>
+</div>
+
+<d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [type]="'striped'" [checkable]="true" fixHeader="true" maxHeight="400px">
+  <d-column field="$index" header="#" [width]="'50px'"></d-column>
+  <d-column
+    *ngFor="let colOption of dataTableOptions.columns"
+    [field]="colOption.field"
+    [header]="colOption.header"
+    [fieldType]="colOption.fieldType"
+    [width]="'150px'"
+  >
+  </d-column>
+  <d-column
+  (filterChange)="filterChange($event)"
+  [filterMultiple]="false"
+    field="rank"
+    header="告警等级"
+    [sortable]="true"
+    [width]="'150px'"
+    [filterable]="true"
+    [filterList]="filterList"
+  ></d-column>
+</d-data-table>

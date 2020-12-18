@@ -47,6 +47,7 @@
               dDatepicker
               appendToBody
               #datePicker2="datepicker"
+              [minDate]="startDate"
               (selectedDateChange)="getValue($event)"
               [customViewTemplate]="myCustomview1"
             />

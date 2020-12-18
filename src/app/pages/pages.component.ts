@@ -26,8 +26,8 @@ export class PagesComponent implements OnInit {
 
   // splitter pane input
   size = '10%';
-  minSize = '20%';
-  maxSize = '60%';
+  minSize = '8%';
+  maxSize = '20%';
   collapsed = false;
   isPaneShrink = false; // 默认不收缩
   hoverCard: Array<any> = [];

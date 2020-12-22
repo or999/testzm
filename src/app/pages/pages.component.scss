@@ -2,7 +2,7 @@
 
 d-layout {
   background-color: $devui-base-bg;
-  height: 96vh;
+  // height: 96vh;
 }
 
 d-aside {
@@ -51,27 +51,25 @@ d-header {
 .avator {
   display: block;
 }
-
 d-footer {
   color: $devui-light-text;
   background-color: $devui-base-bg-dark;
-  padding: 9px 24px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  padding: 19px 24px;
+  width: 100%;
+  display: block;
 }
 
 .splitter-border {
   height: 100%;
-
   .menu {
     height: 100%;
   }
 }
 
 .pane-content {
-  padding: 10px 20px;
+  padding: 0 25px;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .title-icon {
@@ -90,7 +88,6 @@ d-footer {
     background-color: $devui-list-item-hover-bg;
     color: $devui-brand-active;
   }
-
   &.active {
     color: $devui-brand-active;
   }

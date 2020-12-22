@@ -1,45 +1,5 @@
 
-<!-- <d-layout>
-    <d-header>
-      <div class="logo">
-        <span class="logo-devui">
-          <img [src]="logoSrc" width="26px" height="26px" />
-        </span>
-        <span class="text">DevUI</span>
-      </div>
-    </d-header>
-    <d-layout>
-      <d-aside>
-        <d-accordion [data]="menu"
-         class="menu" 
-         [restrictOneOpen]="true"
-          (itemClick)="itemClick($event)"
-           [accordionType]="'normal'">
-
-        </d-accordion>
-      </d-aside>
-      <d-content>
-        <d-breadcrumb>
-          <d-breadcrumb-item>
-            <span>DevUI</span>
-          </d-breadcrumb-item>
-          <d-breadcrumb-item>
-            <span>{{activeBread||'内容一'}}</span>
-          </d-breadcrumb-item>
-          <d-breadcrumb-item>
-            <span>{{activeItem||'子内容一'}}</span>
-          </d-breadcrumb-item>
-        </d-breadcrumb>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </d-content>
-    </d-layout>
-    <d-footer>footer</d-footer>
-    
-  </d-layout> -->
-  
-  <d-layout style="height: 100%;">
+  <d-layout style="height: 100vh;">
     <d-header>
       <div class="logo">
         <span class="logo-devui">
@@ -60,7 +20,7 @@
         <li role="menuitem"><a class="devui-dropdown-item" (click)="logOut()">退出</a></li>
       </ul></div>
     </d-header>
-    <d-layout>
+    <d-layout style="height: 100%;overflow-y: scroll;">
       <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize" [showCollapseButton]="true">
         <d-splitter-pane
           [shrink]="true"
@@ -96,18 +56,16 @@
           </ul>
         </d-splitter-pane>
        
-        <d-splitter-pane minSize="15%">
+        <d-splitter-pane minSize="15%" style="overflow-y: scroll;height: 100%;">
           <div class="pane-content">
             <h2>右侧面板</h2>
             <div>
               <router-outlet></router-outlet>
               <d-toast [value]="msgs"></d-toast>
             </div>
-            <d-footer>footer</d-footer>
           </div>
+        <d-footer>footer</d-footer>
         </d-splitter-pane>
       </d-splitter>
     </d-layout>
-   
-    
   </d-layout> 

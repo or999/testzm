@@ -96,3 +96,13 @@
         transform: translate(0);
       }
 }
+
+.triangle{
+  width: 0;
+  height: 0;
+  border:solid 50px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: burlywood;
+}

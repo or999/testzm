@@ -70,7 +70,7 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
       key: '259d444fe2a92c30a37d89767439d230', // 首次load key为必填
       version: '1.4.15',
       // TODO:地图插件
-      plugins: ['AMap.MouseTool'],
+      plugins: ['AMap.MouseTool', 'AMap.ElasticMarker', 'AMap.Map3D'],
       // TODO:数据可视化库
       Loca: {
         version: '1.3.2',
@@ -99,25 +99,26 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
         position: ['113.777523', '34.745608'],
         zIndex: 100
       });
+      // TODO: 自定义信息窗体
+      const info = new AMap.InfoWindow({
+        autoMove: false,
+        content: '这是一个默认的信息窗体。',
+
+      })
       // TODO: 自定义右键菜单
       const contextMenu = new AMap.ContextMenu();
       const mouseTool = new AMap.MouseTool(map);
-      contextMenu.addItem('添加标记', () => {
+      contextMenu.addItem('打开信息弹窗，关闭右键菜单', () => {
         mouseTool.close();
-        const marker1 = new AMap.Marker({
-          map,
-          position: mousexy // 基点位置
-        });
         contextMenu.close();
       }, 0);
-      let mousexy;
       map.on('rightclick', (e) => {
-        mousexy = e.lnglat;
         contextMenu.open(map, e.lnglat);
       });
       // TODO:可视化数据
-      const layer = new Loca.PointLayer({
+      const layer = new Loca.IconLayer({
         map,
+        eventSupport: true,
       });
       const data = [
         { name: '北京市', center: '116.407394,39.904211' },
@@ -130,20 +131,40 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
         lnglat: 'center'
       });
       layer.setOptions({
+        // style: {
+        //   // 圆形半径，单位像素
+        //   radius: 15,
+        //   // 填充颜色
+        //   color: '#07E8E4',
+        //   // 描边颜色
+        //   borderColor: '#5DFBF9',
+        //   // 描边宽度，单位像素
+        //   borderWidth: 1,
+        //   // 透明度 [0-1]
+        //   opacity: 0.5,
+        // }
+        source: '/favicon.ico',  // base64 格式图片
+        // 可以使用函数回调的形式
+        // source: function(res) {
+        //         var value = res.value;
+        //         var typecode = value.typecode;
+        //         var src = 'https://a.amap.com/Loca/static/manual/banks/'+ bankMap[typecode] + '.png';
+        //        return src;
+        //     },
         style: {
-          // 圆形半径，单位像素
-          radius: 15,
-          // 填充颜色
-          color: '#07E8E4',
-          // 描边颜色
-          borderColor: '#5DFBF9',
-          // 描边宽度，单位像素
-          borderWidth: 1,
-          // 透明度 [0-1]
+          // 默认半径单位为像素
+          size: 50,
           opacity: 0.5,
         }
       });
       layer.render();
+      layer.on('mousemove', (ev) => {
+        // 当前元素的原始数据
+        const rawData = ev.rawData;
+        // 原始鼠标事件
+        const originalEvent = ev.originalEvent;
+        info.open(map, ev.lnglat);
+      })
       map.on('click', (e) => {
         const jing = e.lnglat.getLng();
         const wei = e.lnglat.getLat();
@@ -154,6 +175,7 @@ export class SuperrootComponent implements OnInit, AfterViewInit {
       console.log(e);
     });
   }
+
   Test(x): void {
     const a = identity<string>(x);
     const b = identity('string');

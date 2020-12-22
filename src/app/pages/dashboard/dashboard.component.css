@@ -2,3 +2,97 @@
     width: 800px;
     height: 500px;
 }
+.button-demo,.button-demo::after{
+    width: 380px;
+    height: 86px;
+    line-height: 100%;
+    background: linear-gradient(45deg,yellow 5%,rgb(179, 77, 77) 5%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    position: relative;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+.button-demo::after{
+    box-shadow:6px 0px 0px #00E6F6;
+    --slice-0:inset(40% 30% 40% 30%);
+    --slice-1:inset(70% -7px 15% 0);
+    --slice-2:inset(80% -2px 9% 0);
+    --slice-3:inset(10% -5px 80% 0);
+    --slice-4:inset(50% -4px 30% 0);
+    --slice-5:inset(20% -3px 25% 2px);
+    --slice-5:inset(60% -8px 23% 0);
+    --slice-6:inset(50% 50% 50% 50%);
+    content:'AVAILABLE NOW';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-shadow: -3px -3px 0px #F8F005,3px 3px 0px #00E6F6;
+    background: linear-gradient(45deg,#F8F005 3%,#00E6F6 3%,#00E6F6 5%,rgb(179, 77, 77) 5%);
+    opacity: .9;
+    clip-path: var(--slice-6);
+}
+.button-demo:hover::after{
+    animation: mask 2s;
+}
+@keyframes mask{
+    0% {
+        clip-path: var(--slice-1);
+        transform: translate(-20px, -10px);
+      }
+      
+      10% {
+        clip-path: var(--slice-3);
+        transform: translate(10px, 10px);
+      }
+      
+      20% {
+        clip-path: var(--slice-4);
+        transform: translate(-10px, 10px);
+      }
+      
+      30% {
+        clip-path: var(--slice-0);
+        transform: translate(0px, 5px);
+      }
+      
+      40% {
+        clip-path: var(--slice-4);
+        transform: translate(-5px, 0px);
+      }
+      
+      50% {
+        clip-path: var(--slice-3);
+        transform: translate(5px, 0px);
+      }
+      
+      60% {
+        clip-path: var(--slice-4);
+        transform: translate(5px, 10px);
+      }
+      
+      70% {
+        clip-path: var(--slice-5);
+        transform: translate(-10px, 10px);
+      }
+      
+      80% {
+        clip-path: var(--slice-3);
+        transform: translate(20px, -10px);
+      }
+      
+      90% {
+        clip-path: var(--slice-2);
+        transform: translate(-10px, 0px);
+      }
+      
+      100% {
+        clip-path: var(--slice-0);
+        transform: translate(0);
+      }
+}

@@ -208,9 +208,8 @@ export class WarningComponent implements OnInit {
     this.queryOptions.endDate = endDate
     if (startDate&&endDate) {
       this.basicDataSource = this.basicDataSource.filter(item => {
-        console.log(item.warningTime-startDate);
-        console.log(endDate-item.warningTime);
-        
+        // console.log(item.warningTime-startDate);
+        // console.log(endDate-item.warningTime);
         return item.warningTime-startDate>=0&&endDate-item.warningTime>=0;
       })
     } else {

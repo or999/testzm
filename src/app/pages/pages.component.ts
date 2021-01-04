@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
 import { MapService } from '../core/amap/map.service';
 import { UserService } from '../core/user/user.service';
 import { menu, IMenuType } from './pages-menu';
-
+import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -13,6 +13,8 @@ import { menu, IMenuType } from './pages-menu';
 })
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
+  imgSrc: string;
+  imageInput: any;
   constructor(private userService: UserService, private router: Router, private mapService: MapService) { }
   msgs: Array<object> = [];
   menu: IMenuType[];
@@ -95,12 +97,9 @@ export class PagesComponent implements OnInit {
       this.router.navigate(['/pages', selectedItem.link]);
     }
   }
-
   paneShrinkStatus(status: boolean): void {
     this.isPaneShrink = status;
-
   }
-
   isChildrenActive(item: { children?: any[]; }): boolean {
     const isActive = item.children && item.children.some((child: { active: boolean; }) => child.active);
     return isActive;
@@ -109,4 +108,12 @@ export class PagesComponent implements OnInit {
     this.userService.logOut();
     this.msgs = [{ severity: 'success', summary: 'success', detail: '退出登录成功' }];
   }
+  getFile(event,dtoggle) {
+   console.log(event);
+    this.imgSrc = this.logoSrc
+    // console.log(event.files);
+    console.log(this.imageInput);
+  //  console.log(this.imgSrc);
+    dtoggle.toggle()
+ }
 }

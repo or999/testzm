@@ -1,0 +1,12 @@
+{
+
+    "/api": {
+
+        "target": "https://wenku.baidu.com",
+
+        "secure": false,
+
+        "changeOrigin": true
+
+    }
+}

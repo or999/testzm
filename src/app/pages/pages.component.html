@@ -1,71 +1,75 @@
-
-  <d-layout style="height: 100vh;">
-    <d-header>
-      <div class="logo">
-        <span class="logo-devui">
-          <img [src]="logoSrc" width="30px" height="30px" />
-        </span>
-        <span class="text">DevUI</span>
-      </div>
-      <div class="message">
-        <d-badge count="8" badgePos="top-right" [offsetXY]="[3, 2]">
-        <i class="icon icon-head-notice" style="font-size: 22px;color: white;"></i>
-      </d-badge></div>
-      <div  class="btn-group" dDropDown [trigger]="'click'" appendToBody 
-      [appendToBodyDirections]="['centerDown']">
-         <d-avatar class="avator" [name]="''"  dDropDownToggle ></d-avatar><ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+<d-layout style="height: 100vh;">
+  <d-header>
+    <div class="logo">
+      <span class="logo-devui">
+        <img [src]="logoSrc" width="30px" height="30px" />
+      </span>
+      <span class="text">DevUI</span>
+    </div>
+    <div class="message" dDropDown [trigger]="'click'" appendToBody [appendToBodyDirections]="['centerDown']">
+      <d-badge count="2" badgePos="top-right" [offsetXY]="[3, 2]">
+        <i class="icon icon-head-notice" style="font-size: 22px;color: white;" dDropDownToggle ></i>
+      </d-badge>
+      <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
+        <li role="menuitem">
+        <a [routerLink]="[ '/pages/warning' ]" class="devui-dropdown-item disabled" routerLinkActive="active" >消息一</a>
+      </li>
+      <li role="menuitem" class="disabled"><a class="devui-dropdown-item">消息二</a></li>
+      </ul>
+    </div>
+    <div class="btn-group" dDropDown [trigger]="'click'" appendToBody [appendToBodyDirections]="['centerDown']" #dtoggle="d-dropdown">
+      <d-avatar class="avator" [name]="''" dDropDownToggle [imgSrc]="imgSrc"></d-avatar>
+      <ul dDropDownMenu class="devui-dropdown-menu devui-scrollbar devui-dropdown-overlay" role="menu">
         <li class="disabled" role="menuitem">
           <a class="devui-dropdown-item disabled">菜单一</a>
         </li>
+        <li role="menuitem">
+          <a class="devui-dropdown-item" style="position: relative;"><input  
+            type="file"
+            id="avatar" name="avatar"
+            accept="image/*,.pdf"
+            [(ngModel)]="imageInput"
+            style="opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;"
+            (change)="getFile($event,dtoggle)"
+          >上传头像</a>
+          </li>
         <li role="menuitem"><a class="devui-dropdown-item" (click)="logOut()">退出</a></li>
-      </ul></div>
-    </d-header>
-    <d-layout style="height: 100%;overflow-y: scroll;">
-      <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize" [showCollapseButton]="true">
-        <d-splitter-pane
-          [shrink]="true"
-          [size]="size"
-          [minSize]="minSize"
-          [maxSize]="maxSize"
-          [collapsed]="collapsed"
-          [shrinkWidth]="40"
-          [collapsible]="true"
-          (sizeChange)="sizeChange($event)"
-          (collapsedChange)="collapsedChange($event)"
-          (shrinkStatusChange)="paneShrinkStatus($event)"
-        >
-          <d-accordion class="menu" *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate" [menuItemTemplate]="menutemplate" [linkType]="'routerLink'" [restrictOneOpen]="true"
-          (itemClick)="itemClick($event)" ></d-accordion>
-          <ng-template #menutemplate let-item="item">
-            <i class="title-icon  {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
-          </ng-template>
-          <ng-template #itemtemplate let-item="item">
-            <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
-          </ng-template>
-    
-          <ul style="padding: 10px 0;display: flex;flex-direction: column;" *ngIf="isPaneShrink" >
-            <li
-            dTooltip
-            [content]="hoverCard[index]"
-            [position]="'right'"
-            *ngFor="let item of menu; let index = index"
+      </ul>
+    </div>
+  </d-header>
+  <d-layout style="height: 100%;overflow-y: scroll;">
+    <d-splitter class="splitter-border" [orientation]="orientation" [splitBarSize]="splitBarSize"
+      [showCollapseButton]="true">
+      <d-splitter-pane [shrink]="true" [size]="size" [minSize]="minSize" [maxSize]="maxSize" [collapsed]="collapsed"
+        [shrinkWidth]="40" [collapsible]="true" (sizeChange)="sizeChange($event)"
+        (collapsedChange)="collapsedChange($event)" (shrinkStatusChange)="paneShrinkStatus($event)">
+        <d-accordion class="menu" *ngIf="!isPaneShrink" [data]="menu" [itemTemplate]="itemtemplate"
+          [menuItemTemplate]="menutemplate" [linkType]="'routerLink'" [restrictOneOpen]="true"
+          (itemClick)="itemClick($event)"></d-accordion>
+        <ng-template #menutemplate let-item="item">
+          <i class="title-icon  {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+        </ng-template>
+        <ng-template #itemtemplate let-item="item">
+          <i class="title-icon {{ item.icon }}"></i><span class="title">{{ item.title }}</span>
+        </ng-template>
+
+        <ul style="padding: 10px 0;display: flex;flex-direction: column;" *ngIf="isPaneShrink">
+          <li dTooltip [content]="hoverCard[index]" [position]="'right'" *ngFor="let item of menu; let index = index"
             class="title-icon {{ item.icon ? item.icon : 'icon-dot-status' }}"
-            [ngClass]="{ active: item.active || isChildrenActive(item) }"
-              (click)="selectItem(item)"
-            ></li>
-          </ul>
-        </d-splitter-pane>
-       
-        <d-splitter-pane minSize="15%" style="overflow-y: scroll;height: 100%;">
-          <div class="pane-content">
-            <h2>右侧面板</h2>
-            <div>
-              <router-outlet></router-outlet>
-              <d-toast [value]="msgs"></d-toast>
-            </div>
+            [ngClass]="{ active: item.active || isChildrenActive(item) }" (click)="selectItem(item)"></li>
+        </ul>
+      </d-splitter-pane>
+
+      <d-splitter-pane minSize="15%" style="overflow-y: scroll;height: 100%;">
+        <div class="pane-content">
+          <h2>右侧面板</h2>
+          <div>
+            <router-outlet></router-outlet>
+            <d-toast [value]="msgs"></d-toast>
           </div>
+        </div>
         <d-footer>footer</d-footer>
-        </d-splitter-pane>
-      </d-splitter>
-    </d-layout>
-  </d-layout> 
+      </d-splitter-pane>
+    </d-splitter>
+  </d-layout>
+</d-layout>

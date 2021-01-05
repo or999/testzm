@@ -63,6 +63,7 @@ export class PagesComponent implements OnInit {
 
   itemClick(event): void {
     // console.log(event);
+    // TODO:点击原生菜单时，修改菜单数据状态，以至于自定义菜单可以同步原生菜单变化。
     const selectedItem = event.item;
     this.menu.forEach((item) => {
       if (item === selectedItem || item.children?.some(
@@ -77,6 +78,7 @@ export class PagesComponent implements OnInit {
     });
   }
   sizeChange(size: any): void {
+    // TODO:监测侧边菜单栏尺寸变化。
     //  console.log(size);
   }
   collapsedChange(event: boolean): void {
@@ -84,6 +86,7 @@ export class PagesComponent implements OnInit {
     this.collapsed = event;
   }
   selectItem(selectedItem: IMenuType): void {
+    // TODO:点击原生菜单时，修改菜单数据状态，以至于自定义菜单可以同步原生菜单变化。
     if (selectedItem.children) {
       this.collapsedChange(false);
     } else {
@@ -98,17 +101,21 @@ export class PagesComponent implements OnInit {
     }
   }
   paneShrinkStatus(status: boolean): void {
+    // TODO:侧边栏缩放
     this.isPaneShrink = status;
   }
   isChildrenActive(item: { children?: any[]; }): boolean {
+    // TODO:自定义菜单 子菜单变化时，父元素点亮。
     const isActive = item.children && item.children.some((child: { active: boolean; }) => child.active);
     return isActive;
   }
   logOut(): void {
+    // TODO: 退出登录按钮。
     this.userService.logOut();
     this.msgs = [{ severity: 'success', summary: 'success', detail: '退出登录成功' }];
   }
-  getFile(event,dtoggle) {
+  getFile(event, dtoggle) {
+    // TODO:上传头像图片
    console.log(event);
     this.imgSrc = this.logoSrc
     // console.log(event.files);

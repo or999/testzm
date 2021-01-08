@@ -11,6 +11,7 @@ import { IFileOptions, IUploadOptions } from 'ng-devui/upload';
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss']
 })
+  
 export class PagesComponent implements OnInit {
   logoSrc = 'https://res.hc-cdn.com/x-roma-components/1.0.10/assets/devui/logo.svg';
   imgSrc: string;

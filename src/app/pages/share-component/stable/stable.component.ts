@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableWidthConfig, TableCheckOptions, DataTableComponent } from 'ng-devui/data-table';
@@ -10,7 +10,7 @@ import { TableFormComponent } from '../table-form/table-form.component';
   styleUrls: ['./stable.component.css']
 })
 export class StableComponent implements OnInit {
-  constructor(private dialogService: DialogService,private router:Router) { }
+  constructor(private dialogService: DialogService,private router:Router,private cdr: ChangeDetectorRef) { }
   // TODO:父组件通过viewchild与子组件通信，使用子组件d-data-table 的公用方法
   // TODO:通过viewchild也可引用本地变量
   @ViewChild(DataTableComponent, { static: true }) datatable: DataTableComponent;
@@ -102,6 +102,37 @@ export class StableComponent implements OnInit {
     pageSize: 6
   };
   totalDataChecked = false;
+  // TODO:懒加载
+  showLoading = false
+  next = 1
+  total = 40
+  complete=false
+  loadMore(event) {
+    if (this.next > this.total) {
+        return;
+    }
+    this.showLoading = true;
+    const end = this.next + 20;
+    const dataSource = [];
+    for (; this.next < end; this.next++) {
+        dataSource.push({
+            address: 8675849037250,
+            name: 'HNJS-0001',
+            type: '华为NB灯控器-x',
+            online: true,
+            on: true,
+            light: 100
+        });
+    }
+    setTimeout(() => {
+        this.basicDataSource = this.basicDataSource.concat(dataSource);
+        this.showLoading = false;
+      this.cdr.detectChanges();
+      // TODO:ChangeDetectorRef
+    }, 300);
+    this.complete = this.next > this.total;
+    console.log(`load more`, this.next, this.complete);
+}
   checkTotalData(): void {
     this.datatable.setTableCheckStatus(
       {
@@ -163,10 +194,10 @@ export class StableComponent implements OnInit {
     });
   }
   onChange2(item): void {
-    console.log(item);
+    // console.log(item);
   }
   lightChange(item): void {
-    console.log(item);
+    // console.log(item);
   }
   ngOnInit(): void {
   }
@@ -280,7 +311,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0001',
     type: '华为NB灯控器-1',
-    // 1. 华为NB灯控器-1 2.  3.
     online: true,
     on: true,
     light: 100
@@ -289,7 +319,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0002',
     type: '⽅⼤NB灯控器',
-    // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
     light: 90
@@ -298,7 +327,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0003',
     type: '顺⾈zigbee灯控器',
-    // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: true,
     light: 88
@@ -307,7 +335,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0004',
     type: '华为NB灯控器-1',
-    // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: false,
     light: 70
@@ -316,7 +343,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0005',
     type: '顺⾈zigbee灯控器',
-    // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: false,
     on: true,
     light: 50
@@ -325,7 +351,6 @@ const originSource = [
     address: 8675849037250,
     name: 'HNJS-0006',
     type: '华为NB灯控器-1',
-    // 1. 华为NB灯控器-1 2. ⽅⼤NB灯控器 3. 顺⾈zigbee灯控器
     online: true,
     on: false,
     light: 100

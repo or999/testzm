@@ -74,7 +74,7 @@
           "options": {
             "browserTarget": "zm:build",
             "proxyConfig":"proxy.conf.json",
-            "hmr": true
+            "hmr": false
           },
           "configurations": {
             "production": {
@@ -82,7 +82,7 @@
             },
             "hmr": {
               "browserTarget": "ng6:build:hmr",
-              "hmr": true
+              "hmr": false
              }
           }
         },

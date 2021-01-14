@@ -1,8 +1,8 @@
-
-  <d-button bsStyle="primary" (click)="openPreventCloseModal()" style="float: right;">添加</d-button>
-  <br>
-  <d-button (click)="printData()">打印表格数据</d-button>
-<d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig" style="text-align: center;">
+<d-button bsStyle="primary" (click)="openPreventCloseModal()" style="float: right;">添加</d-button>
+<br>
+<d-button (click)="printData()">打印表格数据</d-button>
+<d-data-table [dataSource]="basicDataSource" [tableWidthConfig]="tableWidthConfig" style="text-align: center;"
+  lazy="true" (loadMore)="loadMore($event)" dLoading [showLoading]="showLoading" scrollable="true" maxHeight="400px">
   <thead dTableHead [checkable]="true" [checkOptions]="checkOptions">
     <tr dTableRow>
       <th dHeadCell>#</th>
@@ -27,7 +27,8 @@
             <p *ngSwitchCase="'light'">
               <d-slider [(ngModel)]="rowItem[colOption.field]" [min]="0" [max]="100" class="slider"
                 (ngModelChange)="lightChange(rowItem)"></d-slider>
-              <input [(ngModel)]="rowItem[colOption.field]" style="width: 50px;border: #bfc1c1 1px solid;border-radius: 15px;text-align: center;" />
+              <input [(ngModel)]="rowItem[colOption.field]"
+                style="width: 50px;border: #bfc1c1 1px solid;border-radius: 15px;text-align: center;" />
               <!-- <d-progress [percentage]="rowItem[colOption.field]*100" [percentageText]="''+rowItem[colOption.field]*100+'%'"> </d-progress> -->
             </p>
             <p *ngSwitchCase="'on'">
@@ -47,7 +48,8 @@
     </ng-template>
   </tbody>
 </d-data-table>
-<d-pagination class="page-nation" [size]="'sm'" [total]="pager.total" [pageSize]="pager.pageSize"
+<!-- TODO:分页 -->
+<!-- <d-pagination class="page-nation" [size]="'sm'" [total]="pager.total" [pageSize]="pager.pageSize"
   [showPageSelector]="false" [totalItemText]="'总条数'" [(pageIndex)]="pager.pageIndex" [canViewTotal]="true" [lite]="true"
   (pageIndexChange)="onPageIndexChange($event)">
-</d-pagination>
+</d-pagination> -->
